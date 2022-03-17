@@ -29,14 +29,16 @@ class UsersController < ApplicationController
                 href: user_params["href"],
                 uri: user_params['uri']
             )
-            @user.updated(access_token:auth_params["access_token"], refresh_token:auth_params["refresh_token"])
-            redirect_to "http://localhost:4000/medium"
+            @user.update(access_token:auth_params["access_token"], refresh_token:auth_params["refresh_token"])
+            redirect_to "http://localhost:4000/main"
             end
     end
 
+    # NEED TO FINISH THE FIND_OR_CREATE_BY METHOD
     private
 
-    def find_or_create_by
+    def find_or_create_by(username: , spotify_url:, href:, uri:)
+        User.create(username, spotify_url, href, uri)
     end
 
 end
