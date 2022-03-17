@@ -14,9 +14,7 @@ class LoginsController < ApplicationController
         }
 
         url = "https://accounts.spotify.com/authorize/"
-        puts "authorized"
         redirect_to "#{url}?#{query_params.to_query}"
-        puts "redirected"
     end
 
 end
