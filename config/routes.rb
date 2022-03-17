@@ -4,11 +4,10 @@ Rails.application.routes.draw do
   resources :artists, only: [:index, :show]
   resources :songs, only: [:index, :show, :users_songs]
 
-  #NEED A ROUTE TO CALL FOR TOP USER LIST
-
-
-
-
+  get "/login", to: "logins#create"
+  get "/callback", to: "users#create"
+  # get "/login/failure"
+  # get "/login/success"
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
