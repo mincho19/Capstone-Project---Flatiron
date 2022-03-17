@@ -1,12 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Login() {
 
     // need to load login page, make a fetch that will redirect to
-
+ 
   return (
     <div>
-      <button as="a" href="http://localhost:3000/login">Log in</button>  
+      <Link to="//localhost:3000/login">Log in</Link>  
     </div>
   )
 }

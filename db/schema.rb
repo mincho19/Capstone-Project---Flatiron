@@ -10,16 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_16_180431) do
+ActiveRecord::Schema.define(version: 2022_03_17_204338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "activities", force: :cascade do |t|
-    t.bigint "park_id"
-    t.string "name"
-    t.index ["park_id"], name: "index_activities_on_park_id"
-  end
 
   create_table "albums", force: :cascade do |t|
     t.string "name"
@@ -38,39 +32,6 @@ ActiveRecord::Schema.define(version: 2022_03_16_180431) do
     t.integer "popularity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "entrance_fees", force: :cascade do |t|
-    t.string "cost"
-    t.string "description"
-    t.string "title"
-    t.bigint "park_id"
-    t.index ["park_id"], name: "index_entrance_fees_on_park_id"
-  end
-
-  create_table "images", force: :cascade do |t|
-    t.string "title"
-    t.string "altText"
-    t.string "caption"
-    t.string "url"
-    t.bigint "park_id"
-    t.index ["park_id"], name: "index_images_on_park_id"
-  end
-
-  create_table "operatingHours", force: :cascade do |t|
-    t.string "description"
-    t.bigint "park_id"
-    t.index ["park_id"], name: "index_operatingHours_on_park_id"
-  end
-
-  create_table "parks", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.string "latitude"
-    t.string "longitude"
-    t.string "states"
-    t.string "directions"
-    t.string "weatherInfo"
   end
 
   create_table "songs", force: :cascade do |t|
@@ -104,13 +65,8 @@ ActiveRecord::Schema.define(version: 2022_03_16_180431) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "password_digest"
-    t.string "city"
-    t.string "state"
-    t.string "phone"
-    t.string "email"
-    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

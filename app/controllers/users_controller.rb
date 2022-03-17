@@ -8,9 +8,9 @@ class UsersController < ApplicationController
             body = {
                 grant_type: "authorization_code",
                 code: params[:code],
-                redirect_uri: redirect_uri,
-                client_id:
-                client_secret: 
+                redirect_uri: 'http://localhost:3000/callback',
+                client_id: '29e9138a3be045b5bfaef26b9eb5f72b',
+                client_secret: '61a29fdcedda4729b2d70a15447f9fd4'
             }
 
         auth_response = RestClient.post('https://accounts.spotify.com/api/token', body)
@@ -18,7 +18,22 @@ class UsersController < ApplicationController
 
         header = {Authorization: "Bearer #{auth_params["access_token"]}"}
         user_response = RestClient.get("https://api.spotify.com/v1/me")
-    end
+        user_params = JSON.parse(user_response.body)
 
+        @user = User.find_or_create_by(
+            username: user_params["id"],
+            spotify_url: user_params["external_urls"]["spotify"],
+            href: user_params["href"],
+            uri: user_params['uri']
+        )
+        @user.updated(access_token:auth_params["access_token"], refresh_token:auth_params["refresh_token"])
+        redirect_to "http://localhost:4000/medium"
+        end
+    end
+    
+    private
+
+    # def find_or_create_by
+    # end
 
 end
