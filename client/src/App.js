@@ -10,24 +10,22 @@ import Main from "./Main";
 
 function App() {
 
-  const[color, setColor] = useState('#12afed')
-
-  function handleClick(newcolor){
-    setColor(newcolor)
-    document.body.style.backgroundColor = color;
-    console.log(color)
-  }
-
   return (
     <>
-    {document.body.style.backgroundColor = color}
+
     {/* RENDER THE TOP NAV BAR HERE */}
     <Routes>
-      <Route path="/login" onClick ={() => handleClick('24adef')} element={<Login/>}/>
+      <Route path="/login" element={<Login/>}/>
       <Route path="/main" element={<Main/>}/>
     </Routes>
     </>
   )
   }
+
+  // reroute fetch calls via backend (build spotify controller)
+  // render fetch to frontend
+  // once i get data to display start building out front end
+
+  //things to work on: logout function
 
 export default App;

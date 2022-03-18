@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
   post "/session", to: "sessions#create"
 
+  get "/spotify/toptracks", to: "spotify#getTopTracks"
+
   # get "/login/failure"
   # get "/login/success"
 

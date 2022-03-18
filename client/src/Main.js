@@ -36,22 +36,37 @@ export default function Main() {
     console.log(user)
   }
 
+  //need to finsh fetch function w correct params then create controller method to render backend response
   function fetchTopTracks(time){
-    fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=${time}&limit=20`, { 
-      method: 'GET', 
-      headers: {
-          Authentication: `Bearer ${user.access_token}`, 
-          'Content-Type': 'application/json'
-      }
+    fetch('/spotify/toptracks',{
+      method
     })
-      .then(resp => resp.json())
-      .then(songList => setTopSongs(songList))
-  
   }
+
+  // function fetchTopTracks(time){
+  //   fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=${time}&limit=20`, { 
+  //     method: 'GET',
+       
+  //     headers: {
+  //         Authentication: `Bearer ${user.access_token}`, 
+  //         'Content-Type': 'application/json'
+  //     }
+  //   })
+  //     .then(resp => {resp.json()})
+  //     .then(songList => setTopSongs(songList))
+  // }
+
+  function setBackground(){
+    document.body.style = "background: white"
+    console.log("white")
+  }
+
+  // need to reroute request to backend
 
 
   return (
     <div>
+      {setBackground()}
       <button onClick = {handleClickShort}>Short</button>
       <button onClick = {handleClickMedium}>Medium</button>
       <button onClick = {handleClickLong}>Long</button>
