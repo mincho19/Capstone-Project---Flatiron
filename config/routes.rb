@@ -6,6 +6,9 @@ Rails.application.routes.draw do
 
   get "/login", to: "logins#create"
   get "/callback", to: "users#create"
+  get "/me", to: "users#show"
+  post "/session", to: "sessions#create"
+
   # get "/login/failure"
   # get "/login/success"
 
