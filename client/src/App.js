@@ -10,21 +10,23 @@ import Main from "./Main";
 
 function App() {
 
-  const[color, setColor] = useState(195,123,213)
+  const[color, setColor] = useState('#12afed')
 
-  function changeColor(color){
-    setColor(color)
+  function handleClick(newcolor){
+    setColor(newcolor)
+    document.body.style.backgroundColor = color;
+    console.log(color)
   }
 
   return (
-    
-  <div style = {{background: color}}>
+    <>
+    {document.body.style.backgroundColor = color}
     {/* RENDER THE TOP NAV BAR HERE */}
     <Routes>
-      <Route path="/login" onClick ={() => changeColor(195,123,213)} element={<Login/>}/>
+      <Route path="/login" onClick ={() => handleClick('24adef')} element={<Login/>}/>
       <Route path="/main" element={<Main/>}/>
     </Routes>
-  </div>
+    </>
   )
   }
 

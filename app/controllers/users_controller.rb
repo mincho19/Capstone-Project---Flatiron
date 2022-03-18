@@ -47,12 +47,14 @@ class UsersController < ApplicationController
 
             # USER IS CREATED AT THIS POINT, NEED TO CREATE A SESSION
             
-            userBody = {
-                spotify_url: @user.spotify_url
-            }
+            # userBody = {
+            #     spotify_url: @user.spotify_url
+            # }
 
-            session_response = RestClient.post('http://localhost:3000/session', userBody)
-            session_params = JSON.parse(session_response.body)
+            # session_response = RestClient.post('http://localhost:3000/session', userBody)
+            # session_params = JSON.parse(session_response.body)
+
+            session[:user_id] = @user.id
 
             #SESSION IS CREATED, RETURN BACK TO MAIN PAGE
 
