@@ -26,7 +26,7 @@ export default function Main() {
   }
 
   function resetBackground(){
-    document.body.style = "background: white"
+    document.body.style = "background: black"
   }
 
   return (
