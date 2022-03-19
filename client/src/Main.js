@@ -7,9 +7,6 @@ export default function Main() {
   const [topSongs, setTopSongs] = useState('')
   const [user, setUser] = useState('')
 
-  var time;
-  var songs;
-
   useEffect(() => {
     fetch("/me").then((response) => {
       if (response.ok) {
@@ -22,33 +19,19 @@ export default function Main() {
     fetchTopTracks(time, 20)
   }
 
-  //HOW DO I DO IT WITH TWO PARAMS
   function fetchTopTracks(time, limit){
     fetch(`/spotify/top/tracks/${time}/${limit}`)
     .then((res) => res.json())
     .then((data) => setTopSongs(data));
   }
 
-  // function fetchTopTracks(time){
-  //   fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=${time}&limit=20`, { 
-  //     method: 'GET',
-       
-  //     headers: {
-  //         Authentication: `Bearer ${user.access_token}`, 
-  //         'Content-Type': 'application/json'
-  //     }
-  //   })
-  //     .then(resp => {resp.json()})
-  //     .then(songList => setTopSongs(songList))
-  // }
-
-  function setBackground(){
+  function resetBackground(){
     document.body.style = "background: white"
   }
 
   return (
     <div>
-      {setBackground()}
+      {resetBackground()}
       <button onClick = {() => handleClick("short_term")}>Short</button>
       <button onClick = {() => handleClick("medium_term")}>Medium</button>
       <button onClick = {() => handleClick("long_term")}>Long</button>
