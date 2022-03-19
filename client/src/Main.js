@@ -18,26 +18,15 @@ export default function Main() {
     });
   }, []);
 
-  function handleClickShort(){
-    time = "short_term"
-    songs = fetchTopTracks(time);
+  function handleClick(time){
+    fetchTopTracks(time, 20)
   }
 
-  function handleClickMedium(){
-    time = "medium_term"
-    songs = fetchTopTracks(time);
-  }
-
-  function handleClickLong(){
-    time = "long_term"
-    songs = fetchTopTracks(time);
-  }
-
-  //need to finsh fetch function w correct params then create controller method to render backend response
-  function fetchTopTracks(time){
-    fetch(`/spotify/top/tracks/${time}`)
+  //HOW DO I DO IT WITH TWO PARAMS
+  function fetchTopTracks(time, limit){
+    fetch(`/spotify/top/tracks/${time}/${limit}`)
     .then((res) => res.json())
-    .then((data) => {setTopSongs(data)});
+    .then((data) => setTopSongs(data));
   }
 
   // function fetchTopTracks(time){
@@ -57,15 +46,12 @@ export default function Main() {
     document.body.style = "background: white"
   }
 
-  // need to reroute request to backend
-
-
   return (
     <div>
       {setBackground()}
-      <button onClick = {handleClickShort}>Short</button>
-      <button onClick = {handleClickMedium}>Medium</button>
-      <button onClick = {handleClickLong}>Long</button>
+      <button onClick = {() => handleClick("short_term")}>Short</button>
+      <button onClick = {() => handleClick("medium_term")}>Medium</button>
+      <button onClick = {() => handleClick("long_term")}>Long</button>
     </div>
   )
 }
