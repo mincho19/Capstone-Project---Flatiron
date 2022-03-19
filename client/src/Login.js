@@ -2,7 +2,6 @@ import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react'
 import { Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 
 export default function Login() { 
   return (

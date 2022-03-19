@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
-
+import NavBar from './NavBar';
+import { Button, Container } from 'react-bootstrap'
 export default function Main() {
   
   //get user and stores
@@ -32,9 +33,12 @@ export default function Main() {
   return (
     <div>
       {resetBackground()}
-      <button onClick = {() => handleClick("short_term")}>Short</button>
-      <button onClick = {() => handleClick("medium_term")}>Medium</button>
-      <button onClick = {() => handleClick("long_term")}>Long</button>
+      <NavBar/>
+    <Container className = "duration_main">
+      <Button variant="light" onClick = {() => handleClick("short_term")}>Short</Button> 
+      <Button variant="light" onClick = {() => handleClick("medium_term")}>Medium</Button>
+      <Button variant="light" onClick = {() => handleClick("long_term")}>Long</Button>
+    </Container>
     </div>
   )
 }
