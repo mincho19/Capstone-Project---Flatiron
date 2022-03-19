@@ -1,7 +1,7 @@
 
 
 import { Routes, Route } from "react-router-dom";
-import React, {useState} from 'react'
+import React from 'react'
 
 import Login from "./Login";
 import Main from "./Main";
@@ -29,3 +29,5 @@ function App() {
   //things to work on: logout function
 
 export default App;
+
+//need to check if user is already logged in

@@ -5,8 +5,6 @@ class UsersController < ApplicationController
 
     def show
         user = User.find_by(id: session[:user_id])
-        # byebug
-        #session[:user_id] is showing nil
         if user
           render json: user
         else
