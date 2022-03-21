@@ -3,7 +3,6 @@ import NavBar from './NavBar';
 import { Button, Container } from 'react-bootstrap'
 export default function Main() {
   
-  //get user and stores
 
   const [topSongs, setTopSongs] = useState('')
   const [user, setUser] = useState('')

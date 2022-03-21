@@ -1,9 +1,9 @@
 class CreateArtists < ActiveRecord::Migration[6.1]
   def change
-    create_table :artists do |t|
+    create_table :artists,{ id: false } do |t|
       t.string :name
-      t.integer :followers
-      t.integer :popularity
+      t.string :external_url
+      t.string :id
       t.timestamps
     end
   end
