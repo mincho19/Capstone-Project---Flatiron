@@ -1,9 +1,9 @@
 class CreateSongs < ActiveRecord::Migration[6.1]
   def change
-    create_table :songs, { id: false } do |t|
+    create_table :songs do |t|
       t.integer :duration
       t.string :external_url
-      t.string :id
+      t.string :song_id
       t.string :name
       t.integer :popularity
       t.string :preview_url
@@ -11,18 +11,18 @@ class CreateSongs < ActiveRecord::Migration[6.1]
       t.belongs_to :album
       t.belongs_to :artist
 
-      t.integer :acousticness
-      t.integer :danceability
-      t.integer :energy
-      t.integer :instrumentalness
+      t.decimal :acousticness
+      t.decimal :danceability
+      t.decimal :energy
+      t.decimal :instrumentalness
       t.integer :key
-      t.integer :liveness
-      t.integer :loudness
+      t.decimal :liveness
+      t.decimal :loudness
       t.integer :mode
-      t.integer :speechiness
-      t.integer :tempo
+      t.decimal :speechiness
+      t.decimal :tempo
       t.integer :time_signature
-      t.integer :valence
+      t.decimal :valence
       t.timestamps
     end
   end

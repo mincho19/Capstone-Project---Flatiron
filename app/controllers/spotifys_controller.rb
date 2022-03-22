@@ -5,7 +5,9 @@ class SpotifysController < ApplicationController
     # Reducing API Fetch Calls by storing all track ids, then fetching all at once
     #has_and_belongs_to_many - new migration table needed - flush out object mapping
     #need to rename
+    #render json => what is json object how does it work?
     #what information do i want to store
+    #hash vs accessing via square brackets
 
     def getTopTracks
         user = User.find_by(id: session[:user_id])
@@ -21,10 +23,17 @@ class SpotifysController < ApplicationController
         songInfo = Array.new()
         idArray = Array.new()
         songArray = Array.new()
+        albumArray = Array.new()
+
+        artistArray = Array.new()
 
         data.each do |item|
-            artist = Artist.create(name: item['artists'][0]['name'],external_url: item['artists'][0]['external_urls']['spotify'],id: item['artists'][0]['id'])
-            album = Album.create(name: item['album']['name'], release_date: item['album']['release_date'], total_tracks:item['album']['total_tracks'], image_url:item['album']['images'][1]['url'], external_url:item['album']['external_urls']['spotify'], id:item['album']['id'], artist: artist)
+            artist = Artist.create(name: item['artists'][0]['name'],external_url: item['artists'][0]['external_urls']['spotify'],artist_id: item['artists'][0]['id'])
+            album = Album.create(name: item['album']['name'], release_date: item['album']['release_date'], total_tracks:item['album']['total_tracks'], image_url:item['album']['images'][1]['url'], external_url:item['album']['external_urls']['spotify'], album_id:item['album']['id'], artist: artist)
+            
+            artistArray.append(artist)
+            albumArray.append(album)
+
             songParams = {
                 name: item['name'],
                 id: item['id'],
@@ -46,18 +55,19 @@ class SpotifysController < ApplicationController
         feature_params = JSON.parse(feature_response.body)
         data_audio = feature_params["audio_features"]
 
-        byebug
-
         data_audio.each_with_index do |item, index|
+            a = songInfo[index]
+            # byebug
             song = Song.create(
-                name: songInfo[index]['name'],
-                id: songInfo[index]['id'],
-                duration: songInfo[index]['duration_ms'],
-                # external_url: songInfo[index]['external_url']['spotify'],
-                popularity: songInfo[index]['popularity'],
-                preview_url: songInfo[index]['preview_url'],
-                album: songInfo[index]['album'],
-                artist: songInfo[index]['artist'],
+                
+                name: songInfo[index][:name],
+                song_id: songInfo[index][:id],
+                duration: songInfo[index][:duration],
+                external_url: songInfo[index][:external_url],
+                popularity: songInfo[index][:popularity],
+                preview_url: songInfo[index][:preview_url],
+                album: songInfo[index][:album],
+                artist: songInfo[index][:artist],
                 acousticness: item['acousticness'],
                 danceability: item['danceability'],
                 energy: item['energy'],
@@ -72,11 +82,13 @@ class SpotifysController < ApplicationController
                 valence: item['valence']
             )
             songArray.append(song)
-
-            # songuser = SongUser.create(user: user, song: song)
         end
-        byebug
-        return songArray;
+
+        songs = {
+            songs: songArray
+        }
+
+        render json: songs
     end
 
     private
