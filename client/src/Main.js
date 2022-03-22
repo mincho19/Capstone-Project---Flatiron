@@ -32,7 +32,7 @@ export default function Main() {
   function fetchTopTracks(time, limit){
     fetch(`/spotify/top/tracks/${time}/${limit}`)
     .then((res) => res.json())
-    .then((data) => setTopSongs(data))
+    .then((data) => console.log(data))
   }
 
   function handleClickAttribute(param){
