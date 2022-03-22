@@ -10,9 +10,75 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2022_03_21_212659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "albums", id: false, force: :cascade do |t|
+    t.string "name"
+    t.string "release_date"
+    t.integer "total_tracks"
+    t.string "image_url"
+    t.string "external_url"
+    t.string "id"
+    t.bigint "artist_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["artist_id"], name: "index_albums_on_artist_id"
+  end
+
+  create_table "artists", id: false, force: :cascade do |t|
+    t.string "name"
+    t.string "external_url"
+    t.string "id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "songs", id: false, force: :cascade do |t|
+    t.integer "duration"
+    t.string "external_url"
+    t.string "id"
+    t.string "name"
+    t.integer "popularity"
+    t.string "preview_url"
+    t.bigint "album_id"
+    t.bigint "artist_id"
+    t.integer "acousticness"
+    t.integer "danceability"
+    t.integer "energy"
+    t.integer "instrumentalness"
+    t.integer "key"
+    t.integer "liveness"
+    t.integer "loudness"
+    t.integer "mode"
+    t.integer "speechiness"
+    t.integer "tempo"
+    t.integer "time_signature"
+    t.integer "valence"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["album_id"], name: "index_songs_on_album_id"
+    t.index ["artist_id"], name: "index_songs_on_artist_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "spotify_url"
+    t.string "href"
+    t.string "uri"
+    t.string "access_token"
+    t.string "refresh_token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users_songs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "song_id"
+    t.index ["song_id"], name: "index_users_songs_on_song_id"
+    t.index ["user_id"], name: "index_users_songs_on_user_id"
+  end
 
 end

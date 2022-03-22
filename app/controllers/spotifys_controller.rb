@@ -5,6 +5,7 @@ class SpotifysController < ApplicationController
     # Reducing API Fetch Calls by storing all track ids, then fetching all at once
     #has_and_belongs_to_many - new migration table needed - flush out object mapping
     #need to rename
+    #what information do i want to store
 
     def getTopTracks
         user = User.find_by(id: session[:user_id])
@@ -19,6 +20,7 @@ class SpotifysController < ApplicationController
 
         songInfo = Array.new()
         idArray = Array.new()
+        songArray = Array.new()
 
         data.each do |item|
             artist = Artist.create(name: item['artists'][0]['name'],external_url: item['artists'][0]['external_urls']['spotify'],id: item['artists'][0]['id'])
@@ -39,9 +41,12 @@ class SpotifysController < ApplicationController
         end
 
         stringOfIds = idArray.join(',')
+        
         feature_response = RestClient.get("https://api.spotify.com/v1/audio-features?ids=#{stringOfIds}", header)
         feature_params = JSON.parse(feature_response.body)
         data_audio = feature_params["audio_features"]
+
+        byebug
 
         data_audio.each_with_index do |item, index|
             song = Song.create(
@@ -66,9 +71,12 @@ class SpotifysController < ApplicationController
                 time_signature: item['time_signature'],
                 valence: item['valence']
             )
-        
-            songuser = SongUser.create(user: user, song: song)
+            songArray.append(song)
+
+            # songuser = SongUser.create(user: user, song: song)
         end
+        byebug
+        return songArray;
     end
 
     private
