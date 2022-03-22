@@ -34,7 +34,11 @@ body {
     font-family: 'Roboto', sans-serif;
   }
 
-  .duration_main{
+  .term_main{
     text-align: center;
     padding: 100px 0;
+  }
+
+  .term_button{
+    padding: 0px 50px;
   }

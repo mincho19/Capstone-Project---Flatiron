@@ -10,99 +10,79 @@ class SpotifysController < ApplicationController
     #hash vs accessing via square brackets
 
     def getTopTracks
+        
         user = User.find_by(id: session[:user_id])
         time = params[:time_range]
         limit = params[:limit]
         header = {Authorization: "Bearer #{user["access_token"]}"}
         tracks_response = RestClient.get("https://api.spotify.com/v1/me/top/tracks?time_range=#{time}&limit=#{limit}", header)
-        tracks_params = JSON.parse(tracks_response.body)
-        data = tracks_params['items']
+        tracks_parsed = JSON.parse(tracks_response.body)
+        data = tracks_parsed['items']
 
-        # check to see if the object already exists
-
-        songInfo = Array.new()
-        idArray = Array.new()
-        songArray = Array.new()
-        albumArray = Array.new()
-
-        artistArray = Array.new()
+        song_name_array = Array.new()
+        song_id_array = Array.new()
+        acousticness_array = Array.new()
+        danceability_array = Array.new()
+        energy_array = Array.new()
+        instrumentalness_array = Array.new()
+        key_array = Array.new()
+        liveness_array = Array.new()
+        loudness_array = Array.new()
+        mode = Array.new()
+        speechiness_array = Array.new()
+        tempo_array = Array.new()
+        time_signature_array = Array.new()
+        valence_array = Array.new()
 
         data.each do |item|
-            artist = Artist.create(name: item['artists'][0]['name'],external_url: item['artists'][0]['external_urls']['spotify'],artist_id: item['artists'][0]['id'])
-            album = Album.create(name: item['album']['name'], release_date: item['album']['release_date'], total_tracks:item['album']['total_tracks'], image_url:item['album']['images'][1]['url'], external_url:item['album']['external_urls']['spotify'], album_id:item['album']['id'], artist: artist)
-            
-            artistArray.append(artist)
-            albumArray.append(album)
+            song_name_array.append(item['name'])
+            song_id_array.append(item['id'])
+        end
 
-            songParams = {
-                name: item['name'],
-                id: item['id'],
-                duration: item['duration_ms'],
-                external_url: item['external_urls']['spotify'],
-                popularity: item['popularity'],
-                preview_url: item['preview_url'],
-                album: album,
-                artist: artist
+        string_of_ids = song_id_array.join(',')
+
+        audio_features_response = RestClient.get("https://api.spotify.com/v1/audio-features?ids=#{stringOfIds}", header)
+        audio_features_parsed = JSON.parse(audio_features_response.body)
+        audio_features = audio_features_parsed["audio_features"]
+
+        audio_features.each do |item|
+            acousticness_array.append(item['acousticness'])
+            danceability_array.append(item['danceability'])
+            energy_array.append(item['energy'])
+            instrumentalness_array.append(item['instrumentalness'])
+            key_array.append(item['key'])
+            liveness_array.append(item['liveness'])
+            loudness_array.append(item['loudness'])
+            mode.append(item['mode'])
+            speechiness_array.append(item['speechiness'])
+            tempo_array.append(item['tempo'])
+            time_signature_array.append(item['time_signature'])
+            valence_array.append(item['valence'])
+        end                    
+
+        #return an object of all the arrays
+        song_data = {
+            song_name_array: song_name_array
+            song_id_array: song_id_array
+            acousticness_array: acousticness_array
+            danceability_array: danceability_array
+            energy_array: energy_array
+            instrumentalness_array: instrumentalness_array
+            key_array: key_array
+            liveness_array: liveness_array
+            loudness_array: loudness_array
+            mode: mode
+            speechiness_array: speechiness_array
+            tempo_array: tempo_array
+            time_signature_array: time_signature_array
+            valence_array: valence_array
+            averageData: {
+                average_acousticness: acousticness_array.average()
             }
-            # reduce the number of parameter fetches
-            songInfo.append(songParams)
-            idArray.append(item['id'])
-        end
-
-        stringOfIds = idArray.join(',')
-        
-        feature_response = RestClient.get("https://api.spotify.com/v1/audio-features?ids=#{stringOfIds}", header)
-        feature_params = JSON.parse(feature_response.body)
-        data_audio = feature_params["audio_features"]
-
-        data_audio.each_with_index do |item, index|
-            a = songInfo[index]
-            # byebug
-            song = Song.create(
-                
-                name: songInfo[index][:name],
-                song_id: songInfo[index][:id],
-                duration: songInfo[index][:duration],
-                external_url: songInfo[index][:external_url],
-                popularity: songInfo[index][:popularity],
-                preview_url: songInfo[index][:preview_url],
-                album: songInfo[index][:album],
-                artist: songInfo[index][:artist],
-                acousticness: item['acousticness'],
-                danceability: item['danceability'],
-                energy: item['energy'],
-                instrumentalness: item['instrumentalness'],
-                key: item['key'],
-                liveness: item['liveness'],
-                loudness: item['loudness'],
-                mode: item['mode'],
-                speechiness: item['speechiness'],
-                tempo: item['tempo'],
-                time_signature: item['time_signature'],
-                valence: item['valence']
-            )
-            songArray.append(song)
-        end
-
-        songs = {
-            songs: songArray
         }
 
-        render json: songs
+        render json: song_data
     end
 
-    private
-
-    def create_findby_artist(id)
-
-    end
-
-    def create_findby_album(id)
-
-    end
-
-    def create_findby_track(id)
-
-    end
 
 end

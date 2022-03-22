@@ -1,0 +1,72 @@
+        
+        songInfo = Array.new()
+        idArray = Array.new()
+        songArray = Array.new()
+        albumArray = Array.new()
+        artistArray = Array.new()
+        
+        data.each do |item|
+            artist = Artist.create(name: item['artists'][0]['name'],external_url: item['artists'][0]['external_urls']['spotify'],artist_id: item['artists'][0]['id'])
+            album = Album.create(name: item['album']['name'], release_date: item['album']['release_date'], total_tracks:item['album']['total_tracks'], image_url:item['album']['images'][1]['url'], external_url:item['album']['external_urls']['spotify'], album_id:item['album']['id'], artist: artist)
+            
+            artistArray.append(artist)
+            albumArray.append(album)
+
+            songParams = {
+                name: item['name'],
+                id: item['id'],
+                duration: item['duration_ms'],
+                external_url: item['external_urls']['spotify'],
+                popularity: item['popularity'],
+                preview_url: item['preview_url'],
+                album: album,
+                artist: artist
+            }
+            # reduce the number of parameter fetches
+            songInfo.append(songParams)
+            idArray.append(item['id'])
+        end
+
+        stringOfIds = idArray.join(',')
+        
+        feature_response = RestClient.get("https://api.spotify.com/v1/audio-features?ids=#{stringOfIds}", header)
+        feature_params = JSON.parse(feature_response.body)
+        data_audio = feature_params["audio_features"]
+
+        data_audio.each_with_index do |item, index|
+            a = songInfo[index]
+            # byebug
+            song = user.songs.create(
+                
+                name: songInfo[index][:name],
+                song_id: songInfo[index][:id],
+                duration: songInfo[index][:duration],
+                external_url: songInfo[index][:external_url],
+                popularity: songInfo[index][:popularity],
+                preview_url: songInfo[index][:preview_url],
+                album: songInfo[index][:album],
+                artist: songInfo[index][:artist],
+                acousticness: item['acousticness'],
+                danceability: item['danceability'],
+                energy: item['energy'],
+                instrumentalness: item['instrumentalness'],
+                key: item['key'],
+                liveness: item['liveness'],
+                loudness: item['loudness'],
+                mode: item['mode'],
+                speechiness: item['speechiness'],
+                tempo: item['tempo'],
+                time_signature: item['time_signature'],
+                valence: item['valence']
+            )
+            songArray.append(song)
+
+            
+        end
+
+        songs = {
+            songs: songArray,
+            artists: artistArray
+        }
+
+        render json: songs
