@@ -31,9 +31,13 @@ export default function Main() {
       }
     });
 
-    fetch(`/spotify/top/tracks/medium_term/20`)
+    const time = "medium_term"
+    const limit = 20
+
+    fetch(`/spotify/top/tracks/${time}/${limit}`)
     .then((res) => res.json())
     .then((data) => setTopSongsData(data))
+
   }, []);
 
   function handleClickTerm(time){
@@ -54,14 +58,14 @@ export default function Main() {
     // lob up description of the attribute
   }
 
-//NEED TO ADD IN ARTIST AND GENRE
+  //NEED TO ADD IN ARTIST AND GENRE, INSERT PARAMS USING TOPSONGSDATA, where do i call recommendations?
 
-  // function createRecommendations(topSongsData){
-  //   fetch(`/spotify/recommendations/${artist_id}/${genre}/${song_id_1}/${song_id_2}/${song_id_3}/${t_acc}/${t_dan}/${t_dur}/${t_ene}/${t_ins}/${t_key}/${t_liv}/${t_lou}/${t_mod}/${t_pop}/${t_spe}/${t_tem}/${t_tim}/${t_val}`)
-  //   .then((res) => res.json())
-  //   .then((data) => setRecommendedSongs(data))
-  
-  // }
+  function handleClickRecommendations(data){
+    const genre = "pop"
+    fetch(`/spotify/recommendations?artist=${data['artist_id_array'][0]}&genre=${genre}&song_1=${data['song_id_array'][0]}&song_2${data['song_id_array'][1]}&song_3=${data['song_id_array'][2]}&acc=${data['average_acousticness']}&dan=${data['average_danceability']}&ene=${data['average_energy']}&ins=${data['average_instrumentalness']}&key=${data['average_key']}&liv=${data['average_liveness']}&lou=${data['average_loudness']}&mod=${data['average_mode']}&spe=${data['average_speechiness']}&tem=${data['average_tempo']}&tim=${data['average_time_signature']}&val=${data['average_valence']}`)
+    .then((res) => res.json())
+    .then((result) => console.log(result))
+  }
 
   function resetBackground(){
     document.body.style = "background: black"
@@ -98,6 +102,8 @@ export default function Main() {
         <Button onClick = {() => handleClickAttribute("time_signature")}>Time_Signature</Button>
         <Button onClick = {() => handleClickAttribute("valence")}>Valence</Button>
       </Container>
+
+      <Button onClick = {() => handleClickRecommendations(topSongsData)}>Get Recommendations</Button>
 
     </div>
   )
