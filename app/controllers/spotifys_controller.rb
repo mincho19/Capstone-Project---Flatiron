@@ -108,8 +108,6 @@ class SpotifysController < ApplicationController
         artist = params[:artist]
         genre = params[:genre]
         song_1 = params[:song_1]
-        song_2 = params[:song_2]
-        song_3 = params[:song_3]
         acc = params[:acc]
         dan = params[:dan]
         ene = params[:ene]
@@ -146,6 +144,19 @@ class SpotifysController < ApplicationController
 
         render json: recommendations
     end
+
+    private
+
+    def find_create_song
+
+    end
+
+    def find_create_album
+    end
+
+    def find_create_artist
+    end
+    
 
 
 end

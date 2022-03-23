@@ -4,3 +4,5 @@
 Song.delete_all
 Artist.delete_all
 Album.delete_all
+
+puts "Deleted All Data"

@@ -11,10 +11,7 @@ Rails.application.routes.draw do
 
   get "/spotify/top/tracks/:time_range/:limit", to: "spotifys#getTopTracks"
   get "/spotify/recommendations", to: "spotifys#createRecommendation"
-  #/:artist/:genre/:song_1/:song_2/:song_3/:acc/:dan",
-
-  # /:ene/:ins/:key/:liv/:lou/:mod/:spe/:tem/:tim/:val
-  
+    
   # get "/login/failure"
   # get "/login/success"
 
