@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   resources :albums, only: [:index, :show]
   resources :artists, only: [:index, :show]
-  resources :songs, only: [:index, :show, :users_songs]
+  resources :songs
 
   get "/login", to: "logins#create"
   get "/callback", to: "users#create"
@@ -10,8 +10,11 @@ Rails.application.routes.draw do
   post "/session", to: "sessions#create"
 
   get "/spotify/top/tracks/:time_range/:limit", to: "spotifys#getTopTracks"
-  get "/spotify/recommendations/:artist/:genre/:song_1/:song_2/:song_3/:acc/:dan/:dur/:ene/:ins/:key/:liv/:lou/:mod/:pop/:spe/:tem/:tim/:val", to: "spotifys#createRecommendation"
+  get "/spotify/recommendations", to: "spotifys#createRecommendation"
+  #/:artist/:genre/:song_1/:song_2/:song_3/:acc/:dan",
 
+  # /:ene/:ins/:key/:liv/:lou/:mod/:spe/:tem/:tim/:val
+  
   # get "/login/failure"
   # get "/login/success"
 

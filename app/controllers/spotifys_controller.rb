@@ -3,11 +3,10 @@ class SpotifysController < ApplicationController
     # -----------KEY CONSIDERATIONS-----------
     # Need a way to check if a song/artist/album exists
     # Reducing API Fetch Calls by storing all track ids, then fetching all at once
-    #has_and_belongs_to_many - new migration table needed - flush out object mapping
-    #need to rename
-    #render json => what is json object how does it work?
-    #what information do i want to store
-    #hash vs accessing via square brackets
+    # has_and_belongs_to_many - new migration table needed - flush out object mapping
+    # render json => what is json object how does it work?
+    # what information do i want to store, only need to create recommendation objects
+    # hash vs accessing via square brackets
 
     def getTopTracks
         
@@ -18,10 +17,11 @@ class SpotifysController < ApplicationController
         tracks_response = RestClient.get("https://api.spotify.com/v1/me/top/tracks?time_range=#{time}&limit=#{limit}", header)
         tracks_parsed = JSON.parse(tracks_response.body)
         data = tracks_parsed['items']
-
+       
         song_name_array = Array.new()
         song_id_array = Array.new()
-        song_genre_array = Array.new()
+        artist_id_array = Array.new()
+
         acousticness_array = Array.new()
         danceability_array = Array.new()
         energy_array = Array.new()
@@ -38,7 +38,7 @@ class SpotifysController < ApplicationController
         data.each do |item|
             song_name_array.append(item['name'])
             song_id_array.append(item['id'])
-            # NEED TO ADD SONG GENRE IN HERE
+            artist_id_array.append(item['artists'][0]['id'])
         end
 
         string_of_ids = song_id_array.join(',')
@@ -66,6 +66,7 @@ class SpotifysController < ApplicationController
         song_data = {
             song_name_array: song_name_array,
             song_id_array: song_id_array,
+            artist_id_array: artist_id_array,
             acousticness_array: acousticness_array,
             danceability_array: danceability_array,
             energy_array: energy_array,
@@ -97,8 +98,12 @@ class SpotifysController < ApplicationController
     end
 
     def createRecommendation
+ 
         user = User.find_by(id: session[:user_id])
-       
+
+        artistArray = Array.new()
+        albumArray = Array.new()
+        songArray = Array.new()
 
         artist = params[:artist]
         genre = params[:genre]
@@ -107,29 +112,39 @@ class SpotifysController < ApplicationController
         song_3 = params[:song_3]
         acc = params[:acc]
         dan = params[:dan]
-        dur = params[:dur]
         ene = params[:ene]
         ins = params[:ins]
         key = params[:key]
         liv = params[:liv]
         lou = params[:lou]
         mod = params[:mod]
-        pop = params[:pop]
         spe = params[:spe]
         tem = params[:tem]
         tim = params[:tim]
         val = params[:val]
 
         header = {Authorization: "Bearer #{user["access_token"]}"}
-        tracks_response = RestClient.get("https://api.spotify.com/v1/recommendations?limit=3&market=ES&seed_artists=#{artist}&seed_genres=#{genre}&seed_tracks=seed_tracks=#{song_1}%2#{song_2}%2#{song_3}&target_acousticness=#{acc}&target_danceability=#{dan}&target_duration_ms=#{dur}&target_energy=#{ene}&target_instrumentalness=#{ins}&target_key=#{key}&target_liveness=#{liv}&target_loudness=#{lou}&target_mode=#{mod}&target_popularity=#{pop}&target_speechiness=#{spe}&target_tempo=#{tem}&target_time_signature=#{tim}&target_valence=#{val}", header)
+        tracks_response = RestClient.get("https://api.spotify.com/v1/recommendations?limit=15&market=ES&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=pop%2Cedm%2Cr-n-b&seed_tracks=#{song_1}&target_acousticness=#{acc}&target_danceability=#{dan}&target_energy=#{ene}&target_instrumentalness=#{ins}&target_key=#{key}&target_liveness=#{liv}&target_loudness=#{lou}&target_mode=#{mod}&target_speechiness=#{spe}&target_tempo=#{tem}&target_time_signature=#{tim}&target_valence=#{val}", header)
         tracks_parsed = JSON.parse(tracks_response.body)
+        data = tracks_parsed['tracks']
 
-        # NEED TO PARSE BASED ON OUTPUT FROM API
-        data = tracks_parsed['items']
+        data.each do |item|
+            artist = Artist.create(name: item['artists'][0]['name'],external_url: item['artists'][0]['external_urls']['spotify'],artist_id: item['artists'][0]['id'])
+            album = Album.create(name: item['album']['name'], release_date: item['album']['release_date'], total_tracks:item['album']['total_tracks'], image_url:item['album']['images'][1]['url'], external_url:item['album']['external_urls']['spotify'], album_id:item['album']['id'], artist: artist)
+            song = user.songs.create(name: item['name'], id: item['id'], duration: item['duration_ms'], external_url: item['external_urls']['spotify'], popularity: item['popularity'], preview_url: item['preview_url'], album: album, artist: artist)
 
-        # create songs, albums, artists
-        # get preview url and album images
+            artistArray.append(artist)
+            albumArray.append(album)
+            songArray.append(song)
+        end 
 
+        recommendations = {
+            songs: songArray,
+            artists: artistArray,
+            albums: albumArray
+        }
+
+        render json: recommendations
     end
 
 

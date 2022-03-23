@@ -1,13 +1,13 @@
 class SongsController < ApplicationController
 
     def index
-        song = find_song
-        render json: park
+        songs = Song.all
+        render json: songs
     end
 
     def show
-        songs = Songs.all
-        render json: songs
+        song = find_song
+        render json: park
     end
 
     def users_songs
