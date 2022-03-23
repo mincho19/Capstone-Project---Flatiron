@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post "/session", to: "sessions#create"
 
   get "/spotify/top/tracks/:time_range/:limit", to: "spotifys#getTopTracks"
+  get "/spotify/recommendations/:artist/:genre/:song_1/:song_2/:song_3/:acc/:dan/:dur/:ene/:ins/:key/:liv/:lou/:mod/:pop/:spe/:tem/:tim/:val", to: "spotifys#createRecommendation"
 
   # get "/login/failure"
   # get "/login/success"

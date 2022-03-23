@@ -8,9 +8,9 @@ export default function NavBar() {
     <Container>
     <Navbar.Brand href="/main">Minify</Navbar.Brand>
     <Nav className="me-auto">
-      <Nav.Link href="#About">About</Nav.Link>
+      <Nav.Link href="/about">About</Nav.Link>
       <Nav.Link href="#Profile">Profile</Nav.Link>
-      <Nav.Link href="#Recommendations">Recommendations</Nav.Link>
+      <Nav.Link href="/recommendations">Recommendations</Nav.Link>
       <Nav.Link href="#Logout">Logout</Nav.Link>
     </Nav>
     </Container>
