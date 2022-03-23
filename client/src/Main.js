@@ -8,13 +8,13 @@ import { Button, Container } from 'react-bootstrap'
 
 // NEED TO FINISH CREATING CHART, THEN CLEAN UP LOGIN PAGE
 
-// CHART BY ATTRIBUTE
-
-// SONG LIST
-
 //PROCEED TO RECOMMENDATIONS FUNCTION - CREATE FOR MEDIUM TERM
 //TABLE OF SONGS - SONG NAME, ARTIST, ALBUM ART, DURATION
 //MODAM OF NEW SONGS
+
+// CHART BY ATTRIBUTE
+
+// SONG LIST
 
 //NEED TO FIGURE OUT HOW TO SIGN OUT USER
 
@@ -22,6 +22,7 @@ export default function Main() {
 
   const [topSongsData, setTopSongsData] = useState('')
   const [user, setUser] = useState('')
+  const [recommendedSongs, setRecommendedSongs] = useState([])
 
   useEffect(() => {
     fetch("/me").then((response) => {
@@ -43,6 +44,7 @@ export default function Main() {
     fetch(`/spotify/top/tracks/${time}/${limit}`)
     .then((res) => res.json())
     .then((data) => setTopSongsData(data))
+    // console.log(topSongsData)
   }
 
   function handleClickAttribute(param){
@@ -52,13 +54,14 @@ export default function Main() {
     // lob up description of the attribute
   }
 
-  function createRecommendations(){
-    //make a call to server to fetch from spotify api, create homies
-    fetch(`/spotify/recommendations/${artist_id}/${genre}/${song_id_1}/${song_id_2}/${song_id_3}/${t_acc}/${t_dan}/${t_dur}/${t_ene}/${t_ins}/${t_key}/${t_liv}/${t_lou}/${t_mod}/${t_pop}/${t_spe}/${t_tem}/${t_tim}/${t_val}`)
-    .then((res) => res.json())
-    .then((data) => setTopSongsData(data))
+//NEED TO ADD IN ARTIST AND GENRE
+
+  // function createRecommendations(topSongsData){
+  //   fetch(`/spotify/recommendations/${artist_id}/${genre}/${song_id_1}/${song_id_2}/${song_id_3}/${t_acc}/${t_dan}/${t_dur}/${t_ene}/${t_ins}/${t_key}/${t_liv}/${t_lou}/${t_mod}/${t_pop}/${t_spe}/${t_tem}/${t_tim}/${t_val}`)
+  //   .then((res) => res.json())
+  //   .then((data) => setRecommendedSongs(data))
   
-  }
+  // }
 
   function resetBackground(){
     document.body.style = "background: black"
@@ -71,8 +74,8 @@ export default function Main() {
       {resetBackground()}
 
       <NavBar/>
-      <Graph topSongsData = {topSongsData}/>
-      <SongList topSongsData = {topSongsData}/>
+      {/* <Graph topSongsData = {topSongsData}/>
+      <SongList topSongsData = {topSongsData}/> */}
 
       <Container className = "term_main">
         <Button className = "term_button" variant="light" onClick = {() => handleClickTerm("short_term")}>Short</Button> 
