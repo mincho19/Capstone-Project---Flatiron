@@ -127,10 +127,11 @@ class SpotifysController < ApplicationController
         data = tracks_parsed['tracks']
 
         data.each do |item|
-            artist = Artist.create(name: item['artists'][0]['name'],external_url: item['artists'][0]['external_urls']['spotify'],artist_id: item['artists'][0]['id'])
-            album = Album.create(name: item['album']['name'], release_date: item['album']['release_date'], total_tracks:item['album']['total_tracks'], image_url:item['album']['images'][1]['url'], external_url:item['album']['external_urls']['spotify'], album_id:item['album']['id'], artist: artist)
-            song = user.songs.create(name: item['name'], id: item['id'], duration: item['duration_ms'], external_url: item['external_urls']['spotify'], popularity: item['popularity'], preview_url: item['preview_url'], album: album, artist: artist)
-
+            
+            artist = find_or_create_artist(item)
+            album = find_or_create_album(item, artist)
+            song = find_or_create_song(item, artist, album, user)
+           
             artistArray.append(artist)
             albumArray.append(album)
             songArray.append(song)
@@ -147,16 +148,33 @@ class SpotifysController < ApplicationController
 
     private
 
-    def find_create_song
-
+    def find_or_create_song(item, artist, album, user)
+        song = Song.find_by(song_id: item['id'])
+        if song
+            return song
+        
+        else
+            user.songs.create(name: item['name'], song_id: item['id'], duration: item['duration_ms'], external_url: item['external_urls']['spotify'], popularity: item['popularity'], preview_url: item['preview_url'], album: album, artist: artist)
+        end
     end
 
-    def find_create_album
+    def find_or_create_album(item, artist)
+        album  = Album.find_by(album_id: item['album']['id'])
+        if album
+            return album
+        
+        else
+            Album.create(name: item['album']['name'], release_date: item['album']['release_date'], total_tracks:item['album']['total_tracks'], image_url:item['album']['images'][1]['url'], external_url:item['album']['external_urls']['spotify'], album_id:item['album']['id'], artist: artist)
+        end
     end
 
-    def find_create_artist
+    def find_or_create_artist(item)
+        artist  = Artist.find_by(artist_id: item['artists'][0]['id'])
+        if artist
+            return artist
+        
+        else
+            Artist.create(name: item['artists'][0]['name'],external_url: item['artists'][0]['external_urls']['spotify'],artist_id: item['artists'][0]['id'])
+        end
     end
-    
-
-
 end
