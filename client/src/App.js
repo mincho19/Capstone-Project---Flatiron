@@ -5,6 +5,8 @@ import React from 'react'
 
 import Login from "./Login";
 import Main from "./Main";
+import Recommendation from "./Recommendation";
+import About from "./About"
 
 
 
@@ -14,8 +16,8 @@ function App() {
     <>
     <Routes>
       <Route path="/login" element={<Login/>}/>
-      {/* <Route path="/recommendations" element={<Recommendation/>}/>
-      <Route path="/about" element={<About/>}/> */}
+      <Route path="/recommendations" element={<Recommendation/>}/>
+      <Route path="/about" element={<About/>}/> 
       <Route path="/main" element={<Main/>}/>
     </Routes>
     </>

@@ -62,7 +62,7 @@ export default function Main() {
     const genre = "pop"
     fetch(`/spotify/recommendations?artist=${data['artist_id_array'][0]}&genre=${genre}&song_1=${data['song_id_array'][0]}&song_2${data['song_id_array'][1]}&song_3=${data['song_id_array'][2]}&acc=${data['average_acousticness']}&dan=${data['average_danceability']}&ene=${data['average_energy']}&ins=${data['average_instrumentalness']}&key=${data['average_key']}&liv=${data['average_liveness']}&lou=${data['average_loudness']}&mod=${data['average_mode']}&spe=${data['average_speechiness']}&tem=${data['average_tempo']}&tim=${data['average_time_signature']}&val=${data['average_valence']}`)
     .then((res) => res.json())
-    .then((result) => console.log(result))
+    .then((result) => setRecommendedSongs(result))
   }
 
   function resetBackground(){
@@ -85,9 +85,8 @@ export default function Main() {
         <Button className = "term_button"variant="light" onClick = {() => handleClickTerm("long_term")}>Long</Button>
       </Container>
 
-      {/* there might be a better alternative to a bunch of buttons */}
-      <Container>
-        <Button onClick = {() => handleClickAttribute("acousticness")}>Acoustiness</Button>
+      {/* <Container>
+        <Button onClick = {() => handleClickAttribute("acousticness")}>Acousticness</Button>
         <Button onClick = {() => handleClickAttribute("danceability")}>Danceability</Button>
         <Button onClick = {() => handleClickAttribute("energy")}>Energy</Button>
         <Button onClick = {() => handleClickAttribute("instrumentalness")}>Instrumentalness</Button>
@@ -99,7 +98,7 @@ export default function Main() {
         <Button onClick = {() => handleClickAttribute("tempo")}>Tempo</Button>
         <Button onClick = {() => handleClickAttribute("time_signature")}>Time_Signature</Button>
         <Button onClick = {() => handleClickAttribute("valence")}>Valence</Button>
-      </Container>
+      </Container> */}
 
       <Button onClick = {() => handleClickRecommendations(topSongsData)}>Get Recommendations</Button>
 
