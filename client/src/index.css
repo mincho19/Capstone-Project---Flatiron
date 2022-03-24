@@ -54,10 +54,11 @@ body {
     font-size: x-small;
     margin-bottom:3px;
   }
-  .songDetailsMain{
-    
+  
+  .songMainText{
+    display: inline-block;
+    margin-left: 5px;
   }
-
   /* want to space it correctly */
   .recommendationsList{
     padding-top: 0px;

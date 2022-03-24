@@ -96,9 +96,9 @@ export default function Main() {
 
         {topSongsData ? 
           (buildSongArray(topSongsData).map(song => 
-            <Container key = {song.id} className = "songMain" onClick = {handleClickSong(song)}> 
+            <Container key = {song.id} className = "songMainContainer" onClick = {handleClickSong(song)}> 
               <img size src = {song.picture} alt = "No Album Cover" width="20" height="20"></img>
-              {song.name} - {song.artist} 
+              <div className = "songMainText">{song.name} - {song.artist}</div>
             </Container>)) 
           : (<h2>Loading...</h2>)}
 
