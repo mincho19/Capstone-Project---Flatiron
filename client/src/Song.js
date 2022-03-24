@@ -14,7 +14,7 @@ export default function Song({songName, songPreview, songDuration, albumName, al
   
   return (
     <Container className = "songCard">
-      <img  className = "recommendationsImage" src= {albumImage}></img> 
+      <img  className = "recommendationsImage" src= {albumImage} alt = "No Album Cover Available"></img> 
       <h1 className = "songName">{songName} - {artistName}</h1>
       <h1 className = "songData">Added On: {createdAt} - Duration: {millisToMinutesAndSeconds(songDuration)}</h1>
     </Container>

@@ -22,6 +22,9 @@ class SpotifysController < ApplicationController
         song_id_array = Array.new()
         artist_id_array = Array.new()
 
+        artist_name_array = Array.new()
+        album_image_array = Array.new()
+
         acousticness_array = Array.new()
         danceability_array = Array.new()
         energy_array = Array.new()
@@ -39,6 +42,8 @@ class SpotifysController < ApplicationController
             song_name_array.append(item['name'])
             song_id_array.append(item['id'])
             artist_id_array.append(item['artists'][0]['id'])
+            artist_name_array.append(item['artists'][0]['name'])
+            album_image_array.append(item['album']['images'][1]['url'])
         end
 
         string_of_ids = song_id_array.join(',')
@@ -66,6 +71,8 @@ class SpotifysController < ApplicationController
         song_data = {
             song_name_array: song_name_array,
             song_id_array: song_id_array,
+            artist_name_array: artist_name_array,
+            album_image_array: album_image_array,
             artist_id_array: artist_id_array,
             acousticness_array: acousticness_array,
             danceability_array: danceability_array,

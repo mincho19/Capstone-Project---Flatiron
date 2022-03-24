@@ -37,7 +37,6 @@ export default function Main() {
     fetch(`/spotify/top/tracks/${time}/${limit}`)
     .then((res) => res.json())
     .then((data) => setTopSongsData(data))
-    
   }, []);
 
   function handleClickTerm(time){
@@ -50,11 +49,29 @@ export default function Main() {
     .then((data) => setTopSongsData(data))
   }
 
+  function buildSongArray(topSongsData){
+    const songArray = [];
+    for (var i = 0; i < (topSongsData.song_id_array.length); i++) {
+      const song = {
+        id: topSongsData.song_id_array[i],
+        name: topSongsData.song_name_array[i],
+        artist: topSongsData.artist_name_array[i],
+        picture: topSongsData.album_image_array[i]
+      }
+      songArray.push(song)
+    }
+    return songArray
+  }
+
   function handleClickAttribute(param){
     //when attribute is clicked -> build graph from topSongs data
     //param shoud match the key in topSongs
 
     // lob up description of the attribute
+  }
+
+  function handleClickSong(song){
+    
   }
 
   function handleClickRecommendations(data){
@@ -76,7 +93,16 @@ export default function Main() {
 
       <NavBar/>
       <Container className = "songListMain">
-        {topSongsData ? ((topSongsData.song_name_array).map(name => <Container key = {name} className = "songMain">{name}</Container>)) : (<h2>Loading...</h2>)}
+
+        {topSongsData ? 
+          (buildSongArray(topSongsData).map(song => 
+            <Container key = {song.id} className = "songMain" onClick = {handleClickSong(song)}> 
+              <img size src = {song.picture} alt = "No Album Cover" width="20" height="20"></img>
+              {song.name} - {song.artist} 
+            </Container>)) 
+          : (<h2>Loading...</h2>)}
+
+        
       </Container>
       <Container className = "term_main">
         <Button className = "term_button" variant="light" onClick = {() => handleClickTerm("short_term")}>Short</Button> 

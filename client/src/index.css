@@ -49,11 +49,14 @@ body {
     top: 100px;
   }
 
-  .songMain{
+  .songMainContainer{
     color: white;
     font-size: x-small;
+    margin-bottom:3px;
   }
-
+  .songDetailsMain{
+    
+  }
 
   /* want to space it correctly */
   .recommendationsList{
