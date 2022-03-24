@@ -4,11 +4,19 @@ import SongList from './SongList';
 import Graph from './Graph'
 import { Button, Container } from 'react-bootstrap'
 
-// PROJECT OVERVIEW
 
-// NEED TO FINISH CREATING CHART, THEN CLEAN UP LOGIN PAGE
+//pass artist and album art into top songs data
+//build chart for each song
+//clean up main
 
-//NEED TO FIGURE OUT HOW TO SIGN OUT USER
+//build about page
+
+//build profile page
+
+//build SDK Player
+
+//modal for recommended songs
+
 
 export default function Main() {
 

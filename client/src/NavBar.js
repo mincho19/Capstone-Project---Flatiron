@@ -11,7 +11,7 @@ export default function NavBar() {
       <Nav.Link href="/about">About</Nav.Link>
       <Nav.Link href="#Profile">Profile</Nav.Link>
       <Nav.Link href="/recommendations">Recommendations</Nav.Link>
-      <Nav.Link href="#Logout">Logout</Nav.Link>
+      <Nav.Link href="/logout">Logout</Nav.Link>
     </Nav>
     </Container>
   </Navbar>
