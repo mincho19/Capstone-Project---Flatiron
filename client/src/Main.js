@@ -8,12 +8,6 @@ import { Button, Container } from 'react-bootstrap'
 
 // NEED TO FINISH CREATING CHART, THEN CLEAN UP LOGIN PAGE
 
-//need to mod serializers
-
-// CHART BY ATTRIBUTE
-
-// SONG LIST
-
 //NEED TO FIGURE OUT HOW TO SIGN OUT USER
 
 export default function Main() {
@@ -35,7 +29,7 @@ export default function Main() {
     fetch(`/spotify/top/tracks/${time}/${limit}`)
     .then((res) => res.json())
     .then((data) => setTopSongsData(data))
-
+    
   }, []);
 
   function handleClickTerm(time){
@@ -46,7 +40,6 @@ export default function Main() {
     fetch(`/spotify/top/tracks/${time}/${limit}`)
     .then((res) => res.json())
     .then((data) => setTopSongsData(data))
-    // console.log(topSongsData)
   }
 
   function handleClickAttribute(param){
@@ -55,8 +48,6 @@ export default function Main() {
 
     // lob up description of the attribute
   }
-
-  //NEED TO ADD IN ARTIST AND GENRE, INSERT PARAMS USING TOPSONGSDATA, where do i call recommendations?
 
   function handleClickRecommendations(data){
     const genre = "pop"
@@ -76,16 +67,24 @@ export default function Main() {
       {resetBackground()}
 
       <NavBar/>
-      {/* <Graph topSongsData = {topSongsData}/>
-      <SongList topSongsData = {topSongsData}/> */}
-
+      <Container className = "songListMain">
+        {topSongsData ? ((topSongsData.song_name_array).map(name => <Container key = {name} className = "songMain">{name}</Container>)) : (<h2>Loading...</h2>)}
+      </Container>
       <Container className = "term_main">
         <Button className = "term_button" variant="light" onClick = {() => handleClickTerm("short_term")}>Short</Button> 
         <Button className = "term_button" variant="light" onClick = {() => handleClickTerm("medium_term")}>Medium</Button>
         <Button className = "term_button"variant="light" onClick = {() => handleClickTerm("long_term")}>Long</Button>
       </Container>
 
-      {/* <Container>
+      
+
+      <Button onClick = {() => handleClickRecommendations(topSongsData)}>Get Recommendations</Button>
+
+    </div>
+  )
+}
+
+{/* <Container>
         <Button onClick = {() => handleClickAttribute("acousticness")}>Acousticness</Button>
         <Button onClick = {() => handleClickAttribute("danceability")}>Danceability</Button>
         <Button onClick = {() => handleClickAttribute("energy")}>Energy</Button>
@@ -99,9 +98,3 @@ export default function Main() {
         <Button onClick = {() => handleClickAttribute("time_signature")}>Time_Signature</Button>
         <Button onClick = {() => handleClickAttribute("valence")}>Valence</Button>
       </Container> */}
-
-      <Button onClick = {() => handleClickRecommendations(topSongsData)}>Get Recommendations</Button>
-
-    </div>
-  )
-}

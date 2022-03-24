@@ -42,3 +42,47 @@ body {
   .term_button{
     padding: 0px 50px;
   }
+
+  .songListMain{
+    float: left;
+    position: relative;
+    top: 100px;
+  }
+
+  .songMain{
+    color: white;
+    font-size: x-small;
+  }
+
+
+  /* want to space it correctly */
+  .recommendationsList{
+    padding-top: 0px;
+  }
+
+  /* add hover effect */
+
+  .songCard{
+    position:relative;
+    width: 60%;
+
+  }
+
+  .recommendationsImage{
+    width: 50px;
+    height: 50px;
+  }
+
+  .songName{
+    display: inline-block;
+    font-size: small;
+    position:absolute;
+    bottom: 0;
+  }
+
+  .songData{
+    display: inline-block;
+    font-size: xx-small;
+    position:absolute;
+    right: 0;
+  }
