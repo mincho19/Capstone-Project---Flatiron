@@ -1,22 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import NavBar from './NavBar';
-import SongList from './SongList';
 import Graph from './Graph'
 import { Button, Container } from 'react-bootstrap'
 
-
-//pass artist and album art into top songs data
-//build chart for each song
 //clean up main
 
 //build about page
 
 //build profile page
 
-//build SDK Player
-
-//modal for recommended songs
-
+//additional
+  //metric by song
+  //play song in recommendations
 
 export default function Main() {
 
@@ -83,7 +78,6 @@ export default function Main() {
 
   function resetBackground(){
     document.body.style = "background: black"
-    console.log('reloaded main')
   }
 
   return (
@@ -101,9 +95,10 @@ export default function Main() {
               <div className = "songMainText">{song.name} - {song.artist}</div>
             </Container>)) 
           : (<h2>Loading...</h2>)}
-
-        
       </Container>
+
+      <Graph topSongsData = {topSongsData}/>
+
       <Container className = "term_main">
         <Button className = "term_button" variant="light" onClick = {() => handleClickTerm("short_term")}>Short</Button> 
         <Button className = "term_button" variant="light" onClick = {() => handleClickTerm("medium_term")}>Medium</Button>

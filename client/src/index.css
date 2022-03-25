@@ -17,6 +17,7 @@ body {
     }
   }
 
+  /* LOGIN */
   .login{
     text-align: center;
     padding: 70px 0;
@@ -34,6 +35,14 @@ body {
     font-family: 'Roboto', sans-serif;
   }
 
+  /* NAVBAR */
+
+  .me-auto{
+    position: relative;
+    float: right;
+  }
+
+  /* MAIN */
   .term_main{
     text-align: center;
     padding: 100px 0;
@@ -61,27 +70,36 @@ body {
     display: inline-block;
     margin-left: 5px;
   }
-  /* want to space it correctly */
-  .recommendationsList{
-    padding-top: 0px;
-  }
 
-  /* add hover effect */
+  /* ABOUT */
+
+  /* RECOMMENDATIONS */
+  .recommendationsList{
+    position: relative;
+    top: 60px;
+    width: 400px;
+
+  }
 
   .songCard{
     position:relative;
-    width: 60%;
+    margin-top: 3px;
+  }
 
+  .songCard:hover {
+    background-color: red;
   }
 
   .recommendationsImage{
     width: 50px;
     height: 50px;
+    position: relative;
+    left: -12px;
   }
 
   .songName{
     display: inline-block;
-    font-size: small;
+    font-size: x-small;
     position:absolute;
     bottom: 0;
   }

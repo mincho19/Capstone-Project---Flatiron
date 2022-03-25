@@ -7,9 +7,8 @@ export default function Login() {
   return (
     <div className = "login">
       <h1 className = "login_title">Welcome to Minify</h1>
-      <br></br>
       <p className = "login_subtitle">Your Personal Music Recommender</p>
-      <Button href="//localhost:3000/login">Log In</Button>  
+      <Button href="//localhost:3000/login">Get Started</Button>  
     </div>
   )
 }
