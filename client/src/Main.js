@@ -91,9 +91,9 @@ export default function Main() {
 
       {resetBackground()}
 
-      <NavBar/>
+      <NavBar className = "navBar"/>
       <Container className = "songListMain">
-
+        <h1>Your Top Songs...</h1>
         {topSongsData ? 
           (buildSongArray(topSongsData).map(song => 
             <Container key = {song.id} className = "songMainContainer" onClick = {handleClickSong(song)}> 

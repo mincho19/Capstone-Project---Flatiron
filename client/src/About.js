@@ -1,8 +1,12 @@
 import React from 'react'
+import NavBar from './NavBar'
 
 export default function About() {
   return (
-    <div>detail spotify's search engine algorithm</div>
+    <div>
+      <NavBar/>
+      detail spotify's search engine algorithm
+    </div>
   )
 }
 
