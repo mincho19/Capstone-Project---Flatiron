@@ -4,6 +4,7 @@ import {Container } from 'react-bootstrap'
 
 export default function Song({songName, songPreview, songDuration, albumName, albumImage, albumURL, artistName, artistURL, createdAt}) {
   
+
   const millisToMinutesAndSeconds = (millis) => {
     var minutes = Math.floor(millis / 60000);
     var seconds = ((millis % 60000) / 1000).toFixed(0);

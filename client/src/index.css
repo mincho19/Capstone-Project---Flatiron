@@ -56,14 +56,17 @@ body {
     float: left;
     position: relative;
     top: 60px;
+    width: 40%;
+    background-color: #e73c7e;
   }
 
   .songMainContainer{
     color: white;
     font-size: x-small;
-    margin-bottom:3px;
+    margin-top:3px;
+    position: relative;
+    width: 40px;
     background-color: #23a6d5;
-    width: 200px;
   }
   
   .songMainText{
@@ -77,8 +80,8 @@ body {
   .recommendationsList{
     position: relative;
     top: 60px;
-    width: 400px;
-
+    width: 40%;
+   
   }
 
   .songCard{
@@ -99,7 +102,7 @@ body {
 
   .songName{
     display: inline-block;
-    font-size: x-small;
+    font-size: medium;
     position:absolute;
     bottom: 0;
   }
@@ -109,4 +112,8 @@ body {
     font-size: xx-small;
     position:absolute;
     right: 0;
+  }
+
+  .graph{
+    float: right;
   }

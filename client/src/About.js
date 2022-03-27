@@ -3,9 +3,6 @@ import NavBar from './NavBar'
 import { Container } from 'react-bootstrap'
 
 export default function About() {
-  function resetBackground(){
-    document.body.style = "background: black"
-  }
 
   return (
     

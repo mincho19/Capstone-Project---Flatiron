@@ -81,6 +81,6 @@ export default function Graph({topSongsData}) {
     };  
 
   return (
-    <ReactFC {...chartConfigs} />
+    <ReactFC className = "graph" {...chartConfigs} />
   )
 }

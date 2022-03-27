@@ -9,7 +9,7 @@ class LoginsController < ApplicationController
             client_id: '29e9138a3be045b5bfaef26b9eb5f72b',
             response_type: "code",
             redirect_uri: 'http://localhost:3000/callback',
-            scope: "user-library-read user-library-modify user-top-read user-modify-playback-state playlist-modify-public",
+            scope: "user-library-read streaming user-read-playback-state user-read-recently-played user-modify-playback-state user-library-modify user-top-read user-modify-playback-state playlist-modify-public",
             show_dialog: true
         }
 

@@ -7,7 +7,7 @@ import { Button, Container } from 'react-bootstrap'
 
 //build about page
 
-//build profile page
+//refresh token
 
 //additional
   //metric by song
@@ -58,13 +58,6 @@ export default function Main() {
     return songArray
   }
 
-  function handleClickAttribute(param){
-    //when attribute is clicked -> build graph from topSongs data
-    //param shoud match the key in topSongs
-
-    // lob up description of the attribute
-  }
-
   function handleClickSong(song){
     
   }
@@ -86,8 +79,8 @@ export default function Main() {
       {resetBackground()}
 
       <NavBar className = "navBar"/>
-      <Container className = "songListMain">
-        <h1>Your Top Songs...</h1>
+      <Container className="songListMain">
+        {/* <h1>Your Top Songs...</h1> */}
         {topSongsData ? 
           (buildSongArray(topSongsData).map(song => 
             <Container key = {song.id} className = "songMainContainer" onClick = {handleClickSong(song)}> 
@@ -95,6 +88,7 @@ export default function Main() {
               <div className = "songMainText">{song.name} - {song.artist}</div>
             </Container>)) 
           : (<h2>Loading...</h2>)}
+          
       </Container>
 
       <Graph topSongsData = {topSongsData}/>
@@ -105,25 +99,9 @@ export default function Main() {
         <Button className = "term_button"variant="light" onClick = {() => handleClickTerm("long_term")}>Long</Button>
       </Container>
 
-      
-
       <Button onClick = {() => handleClickRecommendations(topSongsData)}>Get Recommendations</Button>
 
     </div>
   )
 }
 
-{/* <Container>
-        <Button onClick = {() => handleClickAttribute("acousticness")}>Acousticness</Button>
-        <Button onClick = {() => handleClickAttribute("danceability")}>Danceability</Button>
-        <Button onClick = {() => handleClickAttribute("energy")}>Energy</Button>
-        <Button onClick = {() => handleClickAttribute("instrumentalness")}>Instrumentalness</Button>
-        <Button onClick = {() => handleClickAttribute("key")}>Key</Button>
-        <Button onClick = {() => handleClickAttribute("liveness")}>Liveness</Button>
-        <Button onClick = {() => handleClickAttribute("loudness")}>Loudness</Button>
-        <Button onClick = {() => handleClickAttribute("mode")}>Mode</Button>
-        <Button onClick = {() => handleClickAttribute("speechiness")}>Speechiness</Button>
-        <Button onClick = {() => handleClickAttribute("tempo")}>Tempo</Button>
-        <Button onClick = {() => handleClickAttribute("time_signature")}>Time_Signature</Button>
-        <Button onClick = {() => handleClickAttribute("valence")}>Valence</Button>
-      </Container> */}

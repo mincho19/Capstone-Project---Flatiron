@@ -1,10 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import NavBar from './NavBar';
 import SongList from './SongList';
+import WebPlayback from './WebPlayback'
+
 
 export default function Recommendation() {
   
   const [user, setUser] = useState('')
+
+
 
   useEffect(() => {
     fetch("/me").then((response) => {
@@ -22,7 +26,12 @@ export default function Recommendation() {
     <>
       <NavBar/>
       <div className = "recommendationsList">
-        {user ? (<SongList data = {user.songs}/>) : (<h2>Loading...</h2>)}
+        {user 
+        ? (<>
+          <SongList data = {user.songs}/>
+          <WebPlayback token = {user.access_token}/>
+          </>) 
+        : (<h2>Loading...</h2>)}
       </div>
     </>
   )
