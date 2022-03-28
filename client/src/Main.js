@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import NavBar from './NavBar';
-import Graph from './Graph'
-import { Button, Container } from 'react-bootstrap'
-
-//clean up main
+import Graph from './Graph';
+import Carousel from './Carousel';
+import {Button, Container } from 'react-bootstrap'
 
 //build about page
 
@@ -16,15 +15,14 @@ import { Button, Container } from 'react-bootstrap'
 export default function Main() {
 
   const [topSongsData, setTopSongsData] = useState('')
-  const [user, setUser] = useState('')
   const [recommendedSongs, setRecommendedSongs] = useState([])
 
   useEffect(() => {
-    fetch("/me").then((response) => {
-      if (response.ok) {
-        response.json().then((user) => setUser(user));
-      }
-    });
+  //   fetch("/me").then((response) => {
+  //     if (response.ok) {
+  //       response.json().then((user) => setUser(user));
+  //     }
+  //   });
 
     const time = "medium_term"
     const limit = 20
@@ -79,7 +77,8 @@ export default function Main() {
       {resetBackground()}
       <NavBar className="navBar" />
       <div className="mainContainer">
-        <div className="songListMain">
+
+        <div className="songColumn">
           <h1>Your Top Songs...</h1>
           {topSongsData ?
             (buildSongArray(topSongsData).map(song =>
@@ -88,8 +87,7 @@ export default function Main() {
                 <div className="songMainText">{song.name} - {song.artist}</div>
               </div>))
             : (<h2>Loading...</h2>)}
-
-          <Button className="getRecommendationsMain" onClick={() => handleClickRecommendations(topSongsData)}>Get Recommendations</Button>
+          
         </div>
 
         <div className="graphColumn">
@@ -101,8 +99,13 @@ export default function Main() {
             <Button className="term_button" variant="light" onClick={() => handleClickTerm("long_term")}>Long</Button>
           </Container>
         </div>
+
+        <div className = "recommendationColumn">
+          <Carousel recommendedsongsarray = {recommendedSongs}/>
+          <Button className="getRecommendationsMain" onClick={() => handleClickRecommendations(topSongsData)}>Get Recommendations</Button>
+        </div>
+
       </div>
     </div>
   )
 }
-

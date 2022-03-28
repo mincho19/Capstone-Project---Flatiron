@@ -29,7 +29,7 @@ export default function Recommendation() {
         {user 
         ? (<>
           <SongList data = {user.songs}/>
-          <WebPlayback token = {user.access_token}/>
+          {/* <WebPlayback token = {user.access_token}/> */}
           </>) 
         : (<h2>Loading...</h2>)}
       </div>

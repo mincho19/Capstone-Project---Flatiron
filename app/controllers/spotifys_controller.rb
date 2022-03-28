@@ -108,8 +108,6 @@ class SpotifysController < ApplicationController
  
         user = User.find_by(id: session[:user_id])
 
-        artistArray = Array.new()
-        albumArray = Array.new()
         songArray = Array.new()
 
         artist = params[:artist]
@@ -129,7 +127,7 @@ class SpotifysController < ApplicationController
         val = params[:val]
 
         header = {Authorization: "Bearer #{user["access_token"]}"}
-        tracks_response = RestClient.get("https://api.spotify.com/v1/recommendations?limit=15&market=ES&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=pop%2Cedm%2Cr-n-b&seed_tracks=#{song_1}&target_acousticness=#{acc}&target_danceability=#{dan}&target_energy=#{ene}&target_instrumentalness=#{ins}&target_key=#{key}&target_liveness=#{liv}&target_loudness=#{lou}&target_mode=#{mod}&target_speechiness=#{spe}&target_tempo=#{tem}&target_time_signature=#{tim}&target_valence=#{val}", header)
+        tracks_response = RestClient.get("https://api.spotify.com/v1/recommendations?limit=5&market=ES&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=#{genre}%2Cedm%2Cr-n-b&seed_tracks=#{song_1}&target_acousticness=#{acc}&target_danceability=#{dan}&target_energy=#{ene}&target_instrumentalness=#{ins}&target_key=#{key}&target_liveness=#{liv}&target_loudness=#{lou}&target_mode=#{mod}&target_speechiness=#{spe}&target_tempo=#{tem}&target_time_signature=#{tim}&target_valence=#{val}", header)
         tracks_parsed = JSON.parse(tracks_response.body)
         data = tracks_parsed['tracks']
 
@@ -139,18 +137,16 @@ class SpotifysController < ApplicationController
             album = find_or_create_album(item, artist)
             song = find_or_create_song(item, artist, album, user)
            
-            artistArray.append(artist)
-            albumArray.append(album)
-            songArray.append(song)
+            recommendation = {
+                song: song,
+                album: album,
+                artist: artist
+            }
+
+            songArray.append(recommendation)
         end 
 
-        recommendations = {
-            songs: songArray,
-            artists: artistArray,
-            albums: albumArray
-        }
-
-        render json: recommendations
+        render json: songArray
     end
 
     private
@@ -179,7 +175,6 @@ class SpotifysController < ApplicationController
         artist  = Artist.find_by(artist_id: item['artists'][0]['id'])
         if artist
             return artist
-        
         else
             Artist.create(name: item['artists'][0]['name'],external_url: item['artists'][0]['external_urls']['spotify'],artist_id: item['artists'][0]['id'])
         end
