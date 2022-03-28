@@ -12,19 +12,19 @@ export default function Graph({topSongsData}) {
   
     const chartData = [
       {
-        label: "Average Acousticness",
+        label: "Acousticness",
         value: `${topSongsData.average_acousticness}`
       },
       {
-        label: "Average Danceability",
+        label: "Danceability",
         value: `${topSongsData.average_danceability}`
       },
       {
-        label: "Average Energy",
+        label: "Energy",
         value: `${topSongsData.average_energy}`
       },
       {
-        label: `Average Instrumentalness`,
+        label: `Instrumentalness`,
         value: `${topSongsData.average_instrumentalness}`
       },
     //   {
@@ -32,7 +32,7 @@ export default function Graph({topSongsData}) {
     //     value: `${topSongsData.average_key}`
     //   },
       {
-        label: `Average Liveness`,
+        label: `Liveness`,
         value: `${topSongsData.average_liveness}`
       },
     //   {
@@ -40,11 +40,11 @@ export default function Graph({topSongsData}) {
     //     value: `${topSongsData.average_loudness}`
     //   },
       {
-        label: `Average Mode`,
+        label: `Mode`,
         value: `${topSongsData.average_mode}`
       },
       {
-        label: `Average Speechiness`,
+        label: `Speechiness`,
         value: `${topSongsData.average_speechiness}`
       },
     //   {
@@ -56,7 +56,7 @@ export default function Graph({topSongsData}) {
     //     value: `${topSongsData.average_time_signature}`
     //   },
       {
-        label: `Average Valence`,
+        label: `Valence`,
         value: `${topSongsData.average_valence}`
       },
     ];

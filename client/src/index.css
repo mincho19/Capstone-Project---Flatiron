@@ -43,9 +43,14 @@ body {
   }
 
   /* MAIN */
+
+  .mainContainer{
+    display: flex;
+    margin-top: 5%;
+  }
+
   .term_main{
     text-align: center;
-    padding: 100px 0;
   }
 
   .term_button{
@@ -55,18 +60,15 @@ body {
   .songListMain{
     float: left;
     position: relative;
-    top: 60px;
-    width: 40%;
-    background-color: #e73c7e;
+    max-width: 100%;
   }
 
   .songMainContainer{
     color: white;
     font-size: x-small;
-    margin-top:3px;
+    margin-top: 3px;
     position: relative;
-    width: 40px;
-    background-color: #23a6d5;
+    background-color: #0e3846;
   }
   
   .songMainText{
@@ -74,17 +76,34 @@ body {
     margin-left: 5px;
   }
 
+  .getRecommendationsMain{
+    align-items: center;
+    margin-top: 5%;
+  }
+
+  .graphColumn{
+    margin-top: 5%;
+    align-items: center;
+    margin-left: 5%;
+  }
+
   /* ABOUT */
 
+  .aboutContainer{
+    margin-top: 5%;
+    color: white;
+  }
+
   /* RECOMMENDATIONS */
+
   .recommendationsList{
     position: relative;
     top: 60px;
     width: 40%;
-   
   }
 
   .songCard{
+    /* display: flex; */
     position:relative;
     margin-top: 3px;
   }
@@ -114,6 +133,4 @@ body {
     right: 0;
   }
 
-  .graph{
-    float: right;
-  }
+  

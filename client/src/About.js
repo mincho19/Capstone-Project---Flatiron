@@ -9,7 +9,8 @@ export default function About() {
     <div>
       {document.body.style = "background: black"}
       <NavBar/>
-      <Container>
+      <Container className = "aboutContainer">
+        <h1>Music Recommendation Method</h1>
         <div>Personalization services at Spotify rely on learning meaningful representations of tracks and users to surface apt recommendations to users in a number of different use cases. When learning track representations, one can leverage various types of heterogeneous information encoded in music data to benefit downstream recommendation tasks: </div>
         <br></br>
         <ul>
@@ -21,6 +22,7 @@ export default function About() {
         We developed MUSIG, a multi-task formulation of graph representation learning to learn track representations based on both content features and structural graph neighborhoods. Our model is trained on multiple tasks (playlist co-occurrence, acoustic similarity and genre prediction), which enables the generalizability of the learned embeddings on downstream tasks.
         <br></br>
         We evaluated MUSIG on a music dataset representing tracks and playlists from Spotify, from a collection of over 95K playlists. Our experiments showed that our graph-based approach has numerous advantages:
+        
         <br></br>
         <ul>
           <li> Allows us to aggregate graph structure and node features, encoding two sources of complementary information; </li>
