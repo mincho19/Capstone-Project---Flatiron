@@ -63,8 +63,8 @@ export default function Graph({topSongsData}) {
     
     const chartConfigs = {
       type: "column2d", // The chart type
-      width: "700", // Width of the chart
-      height: "400", // Height of the chart
+      width: "100%", // Width of the chart
+      height: "56%", // Height of the chart
       dataFormat: "json", // Data type
       dataSource: {
         chart: {
@@ -81,6 +81,6 @@ export default function Graph({topSongsData}) {
     };  
 
   return (
-    <ReactFC className = "graph" {...chartConfigs} />
+    <ReactFC {...chartConfigs} />
   )
 }

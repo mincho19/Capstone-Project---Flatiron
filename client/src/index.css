@@ -47,25 +47,19 @@ body {
   .mainContainer{
     display: flex;
     margin-top: 5%;
-  }
+    align-items: center;
 
-  .term_main{
-    text-align: center;
-  }
-
-  .term_button{
-    padding: 0px 50px;
   }
 
   .songColumn{
     float: left;
     position: relative;
-    max-width: 100%;
     margin-left: 5%;
   }
 
   .songMainContainer{
     display: flex;
+    max-width: 80%;
     align-items: center;
     color: white;
     font-size: medium;
@@ -74,26 +68,41 @@ body {
     position: relative;
     background-color: #0e3846;
   }
+
+  .songMainText:hover {
+    cursor: pointer;
+  }
   
   .songMainText{
     display: inline-block;
     margin-left: 5px;
   }
 
-  .getRecommendationsMain{
-    align-items: center;
-    margin-top: 5%;
-  }
 
   .graphColumn{
     align-items: center;
-    margin-left: 5%;
+    min-width: 40%;
+  }
+
+  .graph{
+    align-items: center;
+    min-width: 100%;
+  }
+
+  .term_main{
+    justify-content: center;
+    text-align: center;
+  }
+
+  .term_button{
+    margin-left: 3%;
+    margin-top: 3%;
   }
 
   .recommendationColumn{
-    align-items: center;
     margin-left: 5%;
   }
+
 
   /* ABOUT */
 

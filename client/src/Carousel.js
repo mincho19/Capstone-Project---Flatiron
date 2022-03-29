@@ -5,9 +5,9 @@ export default function CarouselComponent({recommendedsongsarray}) {
     return (
         <Carousel>
         {recommendedsongsarray.map(songObject => 
-            <Carousel.Item>
+            <Carousel.Item key = {songObject['song']['id']}>
             <img
-            //   className="d-block w-100"
+            className = "image"
               src={songObject['album']['image_url']}
               alt={songObject['song']['name']}
             />

@@ -16,13 +16,10 @@ export default function Main() {
 
   const [topSongsData, setTopSongsData] = useState('')
   const [recommendedSongs, setRecommendedSongs] = useState([])
+  const [graphSongData, setGraphSongData] = useState()
+  const [termGraph, setTermGraph] = useState(true)
 
   useEffect(() => {
-  //   fetch("/me").then((response) => {
-  //     if (response.ok) {
-  //       response.json().then((user) => setUser(user));
-  //     }
-  //   });
 
     const time = "medium_term"
     const limit = 20
@@ -34,6 +31,8 @@ export default function Main() {
 
   function handleClickTerm(time) {
     fetchTopTracks(time, 20)
+    setTermGraph(true)
+
   }
 
   function fetchTopTracks(time, limit) {
@@ -42,14 +41,22 @@ export default function Main() {
       .then((data) => setTopSongsData(data))
   }
 
-  function buildSongArray(topSongsData) {
+  function buildSongObjectArray(topSongsData) {
     const songArray = [];
     for (var i = 0; i < (topSongsData.song_id_array.length); i++) {
       const song = {
         id: topSongsData.song_id_array[i],
         name: topSongsData.song_name_array[i],
         artist: topSongsData.artist_name_array[i],
-        picture: topSongsData.album_image_array[i]
+        picture: topSongsData.album_image_array[i],
+        average_acousticness: topSongsData.acousticness_array[i],
+        average_danceability: topSongsData.danceability_array[i],
+        average_energy: topSongsData.energy_array[i],
+        average_instrumentalness: topSongsData.instrumentalness_array[i],
+        average_liveness: topSongsData.liveness_array[i],
+        average_mode: topSongsData.mode_array[i],
+        average_speechiness: topSongsData.speechiness_array[i],
+        average_valence: topSongsData.valence_array[i]
       }
       songArray.push(song)
     }
@@ -57,7 +64,8 @@ export default function Main() {
   }
 
   function handleClickSong(song) {
-
+    setTermGraph(false)
+    setGraphSongData(song)
   }
 
   function handleClickRecommendations(data) {
@@ -77,12 +85,11 @@ export default function Main() {
       {resetBackground()}
       <NavBar className="navBar" />
       <div className="mainContainer">
-
         <div className="songColumn">
           <h1>Your Top Songs...</h1>
           {topSongsData ?
-            (buildSongArray(topSongsData).map(song =>
-              <div key={song.id} className="songMainContainer" onClick={handleClickSong(song)}>
+            (buildSongObjectArray(topSongsData).map(song =>
+              <div key={song.id} className="songMainContainer" onClick={() => handleClickSong(song)}>
                 <img size src={song.picture} alt="No Album Cover" width="20" height="20"></img>
                 <div className="songMainText">{song.name} - {song.artist}</div>
               </div>))
@@ -91,18 +98,22 @@ export default function Main() {
         </div>
 
         <div className="graphColumn">
-          <Graph className="graph" topSongsData={topSongsData} />
+
+          {termGraph 
+            ? <Graph className = "graph" topSongsData={topSongsData} />
+            : <Graph className = "graph" topSongsData={graphSongData} />
+          }
 
           <Container className="term_main">
             <Button className="term_button" variant="light" onClick={() => handleClickTerm("short_term")}>Short</Button>
             <Button className="term_button" variant="light" onClick={() => handleClickTerm("medium_term")}>Medium</Button>
             <Button className="term_button" variant="light" onClick={() => handleClickTerm("long_term")}>Long</Button>
+            <Button className="term_button" onClick={() => handleClickRecommendations(topSongsData)}>Get Recommendations</Button>
           </Container>
         </div>
 
         <div className = "recommendationColumn">
-          <Carousel recommendedsongsarray = {recommendedSongs}/>
-          <Button className="getRecommendationsMain" onClick={() => handleClickRecommendations(topSongsData)}>Get Recommendations</Button>
+          <Carousel className = "carousel" recommendedsongsarray = {recommendedSongs}/>
         </div>
 
       </div>
