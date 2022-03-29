@@ -137,6 +137,7 @@ const genres = [
 //fix song album art bug
 //set navigation
 //clean up regetting tokens
+//genre button
 
 //clean up recommendations page
 //clean up about
@@ -222,6 +223,7 @@ export default function Main() {
 
   return (
     <div>
+      {console.log(genre)}
 
       {resetBackground()}
       <NavBar className="navBar" />
@@ -240,6 +242,8 @@ export default function Main() {
 
         <div className="graphColumn">
 
+          {console.log(genre)}
+
           {termGraph 
             ? <Graph className = "graph" caption = "Average User Data by Metric" subCaption = {term} topSongsData={topSongsData} />
             : <Graph className = "graph" caption = "Song Data by Metric" subCaption = {graphSongData.name} topSongsData={graphSongData} />
@@ -250,8 +254,9 @@ export default function Main() {
             <Button className="term_button" variant="light" onClick={() => handleClickTerm("medium_term")}>Medium</Button>
             <Button className="term_button" variant="light" onClick={() => handleClickTerm("long_term")}>Long</Button>
             <Button className="term_button" onClick={() => handleClickRecommendations(topSongsData)}>Get Recommendations</Button>
-            {/* <Dropdown  genres = {genres} setGenre = {() => setGenre}/> */}
+            <Dropdown className="d-inline-block" genres = {genres} setGenre={setGenre}/>
           </Container>
+          
         </div>
 
         <div className = "recommendationColumn">

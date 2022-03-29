@@ -1,29 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import { Dropdown } from 'react-bootstrap'
+import React, { useState } from 'react'
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
 
-export default function DropdownComponent({genres, setGenre}) {
 
-    const [button, setButton] = useState('Dropdown')
+export default function DropdownComponent({ genres, setGenre }) {
 
-    function handleSelect(e){
-        setGenre(e)
-        setButton(e.value)
-        console.log('fired')
-    }
+  const [button, setButton] = useState('Dropdown')
+
+  function handleSelect(e) {
+    setGenre(e)
+    setButton(e)
+  }
 
   return (
-    <Dropdown>
-    <Dropdown.Toggle variant="success" id="dropdown-basic">
-      {button}
-    </Dropdown.Toggle>
-  
-    <Dropdown.Menu onSelect = {handleSelect} className = "dropDownMenu">
-        
-        {genres.map(genre => {
-            <Dropdown.Item>genre</Dropdown.Item>
-        })}
-            <Dropdown.Item>genre</Dropdown.Item>
-    </Dropdown.Menu>
-  </Dropdown>
+    <DropdownButton title= {button} onSelect={handleSelect} className = "dropDown">
+      {genres.map(genre => {
+        return <Dropdown.Item key = {genre} eventKey={genre}>{genre}</Dropdown.Item>
+      })}
+
+    </DropdownButton>
   )
 }

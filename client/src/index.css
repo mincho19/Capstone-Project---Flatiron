@@ -85,7 +85,7 @@ body {
 
   .graphColumn{
     align-items: center;
-    min-width: 40%;
+    min-width: 45%;
   }
 
   .graph{
@@ -96,6 +96,7 @@ body {
   .term_main{
     justify-content: center;
     text-align: center;
+    background-color: white;
   }
 
   .term_button{
@@ -103,10 +104,23 @@ body {
     margin-top: 3%;
   }
 
-  /* .dropDownMenu{
-    height: 300px;
+  .div-inline{
+    display:inline-block;
+}
+
+  .dropDown{
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
     overflow-y: scroll;
-  } */
+    height: 150px;
+  }
+
+  .dropDown::-webkit-scrollbar {
+    display: none; 
+    /* for Chrome, Safari, and Opera */
+}
+
+
 
   .recommendationColumn{
     margin-left: 5%;
