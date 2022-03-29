@@ -42,6 +42,10 @@ body {
     float: right;
   }
 
+  .navBarContainer{
+    width: 5px;
+  }
+
   /* MAIN */
 
   .mainContainer{
@@ -99,23 +103,20 @@ body {
     margin-top: 3%;
   }
 
+  /* .dropDownMenu{
+    height: 300px;
+    overflow-y: scroll;
+  } */
+
   .recommendationColumn{
     margin-left: 5%;
-  }
-
-
-  /* ABOUT */
-
-  .aboutContainer{
-    margin-top: 5%;
-    color: white;
   }
 
   /* RECOMMENDATIONS */
 
   .recommendationsList{
     position: relative;
-    top: 60px;
+    margin-top: 5%;
     width: 40%;
   }
 
@@ -123,6 +124,7 @@ body {
     /* display: flex; */
     position:relative;
     margin-top: 3px;
+    color: white;
   }
 
   .songCard:hover {
@@ -137,6 +139,7 @@ body {
   }
 
   .songName{
+   
     display: inline-block;
     font-size: medium;
     position:absolute;
@@ -150,4 +153,10 @@ body {
     right: 0;
   }
 
+   /* ABOUT */
+
+   .aboutContainer{
+    margin-top: 5%;
+    color: white;
+  }
   

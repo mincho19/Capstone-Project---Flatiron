@@ -8,7 +8,7 @@ import CandyTheme from 'fusioncharts/themes/fusioncharts.theme.candy';
 
 ReactFC.fcRoot(FusionCharts, Column2D, CandyTheme);
 
-export default function Graph({topSongsData}) {
+export default function Graph({caption, subCaption, topSongsData}) {
   
     const chartData = [
       {
@@ -27,18 +27,10 @@ export default function Graph({topSongsData}) {
         label: `Instrumentalness`,
         value: `${topSongsData.average_instrumentalness}`
       },
-    //   {
-    //     label: `Average Key`,
-    //     value: `${topSongsData.average_key}`
-    //   },
       {
         label: `Liveness`,
         value: `${topSongsData.average_liveness}`
       },
-    //   {
-    //     label: `Average Loudness`,
-    //     value: `${topSongsData.average_loudness}`
-    //   },
       {
         label: `Mode`,
         value: `${topSongsData.average_mode}`
@@ -47,14 +39,6 @@ export default function Graph({topSongsData}) {
         label: `Speechiness`,
         value: `${topSongsData.average_speechiness}`
       },
-    //   {
-    //     label: `Average Tempo`,
-    //     value: `${topSongsData.average_tempo}`
-    //   },
-    //   {
-    //     label: `Average Time Signature`,
-    //     value: `${topSongsData.average_time_signature}`
-    //   },
       {
         label: `Valence`,
         value: `${topSongsData.average_valence}`
@@ -68,8 +52,8 @@ export default function Graph({topSongsData}) {
       dataFormat: "json", // Data type
       dataSource: {
         chart: {
-          caption: "Average User Data by Metric",    
-          subCaption: "Medium Term",            
+          caption: caption,    
+          subCaption: subCaption,            
           xAxisName: "Metric",           
           yAxisName: '',  
           numberSuffix: '',

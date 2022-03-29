@@ -18,12 +18,17 @@ export default function Recommendation() {
     });
   }, []);
 
+  function resetBackground() {
+    document.body.style = "background: black"
+  }
+
   // I WANT TO EVENTUALLY INCORPORATE WEB PLAYER SDK
 
   
   return (
 
     <>
+      {resetBackground()}
       <NavBar/>
       <div className = "recommendationsList">
         {user 
