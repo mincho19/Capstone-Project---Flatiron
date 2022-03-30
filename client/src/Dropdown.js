@@ -5,7 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 export default function DropdownComponent({ genres, setGenre }) {
 
-  const [button, setButton] = useState('Dropdown')
+  const [button, setButton] = useState('Pop')
 
   function handleSelect(e) {
     setGenre(e)
@@ -13,7 +13,7 @@ export default function DropdownComponent({ genres, setGenre }) {
   }
 
   return (
-    <DropdownButton title= {button} onSelect={handleSelect} className = "dropDown">
+    <DropdownButton title = {`Genre: ${button}`} onSelect={handleSelect} className = "dropDown">
       {genres.map(genre => {
         return <Dropdown.Item key = {genre} eventKey={genre}>{genre}</Dropdown.Item>
       })}

@@ -8,6 +8,8 @@ export default function CarouselComponent({recommendedsongsarray}) {
     }
 
     return (
+        <>
+        <h1>Featured Tracks</h1>
         <Carousel>
         {recommendedsongsarray.map(songObject => 
             <Carousel.Item key = {songObject['song']['id']} onClick = {() => handleClick(songObject['song']['external_url'])}>
@@ -28,5 +30,6 @@ export default function CarouselComponent({recommendedsongsarray}) {
         )}
          
       </Carousel>
+      </>
     )
 }

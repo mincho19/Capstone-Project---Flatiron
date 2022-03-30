@@ -38,6 +38,8 @@ export default function Recommendation() {
       {resetBackground()}
       <NavBar/>
       <div className = "recommendationsContainer">
+        <div className = "recommendationsColumn">
+        <h1>Recommendations for {user.username}</h1>
         <div className = "recommendationsList">
         {user 
         ? (<>
@@ -46,6 +48,10 @@ export default function Recommendation() {
           </>) 
         : (<h2>Loading...</h2>)}
         </div>
+        </div>
+
+
+
         <div className = "recommendationsCard">
           <img src = {displaySong.albumImage} className = "recommendationsCardImage"></img>
           <div className = "recommendationsCardDetails">

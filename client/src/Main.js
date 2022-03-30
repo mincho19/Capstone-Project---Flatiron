@@ -253,12 +253,13 @@ export default function Main() {
             <Button className="term_button" variant="light" onClick={() => handleClickTerm("medium_term")}>Medium</Button>
             <Button className="term_button" variant="light" onClick={() => handleClickTerm("long_term")}>Long</Button>
             <Button className="term_button" onClick={() => handleClickRecommendations(topSongsData)}>Get Recommendations</Button>
-            <Dropdown className="dropdown d-inline-block" genres = {genres} setGenre={setGenre}/>
+            <Dropdown className="term_button" genres = {genres} setGenre={setGenre}/>
           </Container>
           
         </div>
 
-        <div className = "recommendationColumn">
+        <div className = "featureColumn">
+          
           {carouselToggle
             ? <Carousel className = "carousel" recommendedsongsarray = {recommendedSongs}/>
             : <></>
