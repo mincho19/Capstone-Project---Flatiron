@@ -2,10 +2,15 @@ import React from 'react'
 import Carousel from 'react-bootstrap/Carousel'
 
 export default function CarouselComponent({recommendedsongsarray}) {
+
+    function handleClick(url){
+      window.open(url, '_blank').focus();
+    }
+
     return (
         <Carousel>
         {recommendedsongsarray.map(songObject => 
-            <Carousel.Item key = {songObject['song']['id']}>
+            <Carousel.Item key = {songObject['song']['id']} onClick = {() => handleClick(songObject['song']['external_url'])}>
             <img
             className = "image"
               src={songObject['album']['image_url']}

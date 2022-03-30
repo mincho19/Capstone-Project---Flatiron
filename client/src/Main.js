@@ -134,12 +134,13 @@ const genres = [
   "world-music"
 ]
 
+//need to add descriptions about metric
+//clean up recommendations page
+
 //fix song album art bug
 //set navigation
 //clean up regetting tokens
-//genre button
 
-//clean up recommendations page
 //clean up about
 
 //webplayback
@@ -151,6 +152,7 @@ export default function Main() {
   const [graphSongData, setGraphSongData] = useState()
   const [termGraph, setTermGraph] = useState(true)
   const [term, setTerm] = useState("Medium")
+  const [carouselToggle, setCarouselToggle] = useState(false)
   const [genre, setGenre] = useState('pop')
 
   useEffect(() => {
@@ -212,6 +214,7 @@ export default function Main() {
   }
 
   function handleClickRecommendations(data) {
+    setCarouselToggle(true)
     fetch(`/spotify/recommendations?artist=${data['artist_id_array'][0]}&genre=${genre}&song_1=${data['song_id_array'][0]}&song_2${data['song_id_array'][1]}&song_3=${data['song_id_array'][2]}&acc=${data['average_acousticness']}&dan=${data['average_danceability']}&ene=${data['average_energy']}&ins=${data['average_instrumentalness']}&key=${data['average_key']}&liv=${data['average_liveness']}&lou=${data['average_loudness']}&mod=${data['average_mode']}&spe=${data['average_speechiness']}&tem=${data['average_tempo']}&tim=${data['average_time_signature']}&val=${data['average_valence']}`)
       .then((res) => res.json())
       .then((result) => setRecommendedSongs(result))
@@ -223,8 +226,6 @@ export default function Main() {
 
   return (
     <div>
-      {console.log(genre)}
-
       {resetBackground()}
       <NavBar className="navBar" />
       <div className="mainContainer">
@@ -242,8 +243,6 @@ export default function Main() {
 
         <div className="graphColumn">
 
-          {console.log(genre)}
-
           {termGraph 
             ? <Graph className = "graph" caption = "Average User Data by Metric" subCaption = {term} topSongsData={topSongsData} />
             : <Graph className = "graph" caption = "Song Data by Metric" subCaption = {graphSongData.name} topSongsData={graphSongData} />
@@ -254,13 +253,16 @@ export default function Main() {
             <Button className="term_button" variant="light" onClick={() => handleClickTerm("medium_term")}>Medium</Button>
             <Button className="term_button" variant="light" onClick={() => handleClickTerm("long_term")}>Long</Button>
             <Button className="term_button" onClick={() => handleClickRecommendations(topSongsData)}>Get Recommendations</Button>
-            <Dropdown className="d-inline-block" genres = {genres} setGenre={setGenre}/>
+            <Dropdown className="div-inline" genres = {genres} setGenre={setGenre}/>
           </Container>
           
         </div>
 
         <div className = "recommendationColumn">
-          <Carousel className = "carousel" recommendedsongsarray = {recommendedSongs}/>
+          {carouselToggle
+            ? <Carousel className = "carousel" recommendedsongsarray = {recommendedSongs}/>
+            : <></>
+          }
         </div>
 
       </div>

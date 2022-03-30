@@ -7,8 +7,8 @@ import WebPlayback from './WebPlayback'
 export default function Recommendation() {
   
   const [user, setUser] = useState('')
-
-
+  const [displaySong, setDisplaySong] = useState('')
+  const [currentAudio, setCurrentAudio] = useState('')
 
   useEffect(() => {
     fetch("/me").then((response) => {
@@ -22,21 +22,31 @@ export default function Recommendation() {
     document.body.style = "background: black"
   }
 
-  // I WANT TO EVENTUALLY INCORPORATE WEB PLAYER SDK
-
+  function displayDetails(obj){
+    setDisplaySong(obj)
+    var audio = new Audio(obj.songPreview);
+    audio.play();
+  }
   
   return (
 
     <>
       {resetBackground()}
       <NavBar/>
-      <div className = "recommendationsList">
+      <div className = "recommendationsContainer">
+        <div className = "recommendationsList">
         {user 
         ? (<>
-          <SongList data = {user.songs}/>
+          <SongList data = {user.songs} displayDetails = {(obj) => displayDetails(obj)}/>
           {/* <WebPlayback token = {user.access_token}/> */}
           </>) 
         : (<h2>Loading...</h2>)}
+        </div>
+        <div className = "recommendationsCard">
+          <img src = {displaySong.albumImage} className = "recommendationsCardImage"></img>
+          <h1> {displaySong.artistName} </h1>
+          <h1> {displaySong.albumName}</h1>
+        </div>
       </div>
     </>
   )

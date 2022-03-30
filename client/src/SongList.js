@@ -2,7 +2,7 @@ import React from 'react'
 import Song from './Song'
 import {Container } from 'react-bootstrap'
 
-export default function SongList({data}) {
+export default function SongList({data, displayDetails}) {
   
   return (
     <Container>
@@ -20,6 +20,7 @@ export default function SongList({data}) {
                 artistName = {song['artist']['name']}
                 artistURL = {song['artist']['external_url']}
                 createdAt = {song['created_at']}
+                displayDetails = {(obj) => displayDetails(obj)}
             />
           })
         }

@@ -126,12 +126,34 @@ body {
     margin-left: 5%;
   }
 
+  .carousel{
+    width:320px;
+    height:320px;
+  }
+
   /* RECOMMENDATIONS */
+  .recommendationsContainer{
+    display: flex;
+  }
+
 
   .recommendationsList{
     position: relative;
     margin-top: 5%;
+    margin-left: 5%;
     width: 40%;
+  }
+
+  /* display song info, column two in flexbox */
+  .recommendationsCard{
+    margin-top: 5%;
+    margin-left: 5%;
+    min-width: 40%;
+    background-color: white;
+  }
+
+  .recommendationsCard:hover {
+    cursor: pointer;
   }
 
   .songCard{
@@ -142,8 +164,10 @@ body {
   }
 
   .songCard:hover {
-    background-color: red;
+    background-color: rgb(91, 211, 101);
   }
+
+    /* tiny image in song list */
 
   .recommendationsImage{
     width: 50px;
