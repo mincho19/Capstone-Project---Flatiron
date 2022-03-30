@@ -6,12 +6,15 @@ export default function SongList({data, displayDetails}) {
   
   return (
     <Container>
+      {console.log(data)}
         {
           
           data.map(song  => {
             return <Song
                 key = {song['id']}
                 songName = {song['name']}
+                songURL = {song['external_url']}
+                songPopularity = {song['popularity']}
                 songPreview = {song['preview_url']}
                 songDuration = {song['duration']}
                 albumName = {song['album']['name']}

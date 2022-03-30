@@ -24,7 +24,11 @@ export default function Recommendation() {
 
   function displayDetails(obj){
     setDisplaySong(obj)
-    var audio = new Audio(obj.songPreview);
+    if(currentAudio != ''){
+      currentAudio.pause()
+    }
+    var audio = new Audio(obj.songPreview)
+    setCurrentAudio(audio)
     audio.play();
   }
   
@@ -44,8 +48,14 @@ export default function Recommendation() {
         </div>
         <div className = "recommendationsCard">
           <img src = {displaySong.albumImage} className = "recommendationsCardImage"></img>
-          <h1> {displaySong.artistName} </h1>
-          <h1> {displaySong.albumName}</h1>
+          <div className = "recommendationsCardDetails">
+            <a href={displaySong.songURL}>Name: {displaySong.songName}</a>
+            <div className = "break"></div>
+            <a href={displaySong.albumURL}>Album: {displaySong.albumName}</a>
+            <div className = "break"></div>
+            <a href={displaySong.artistURL}>Artist: {displaySong.artistName}</a>
+            <div className = "break"></div>
+          </div>
         </div>
       </div>
     </>

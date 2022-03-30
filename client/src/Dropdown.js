@@ -17,7 +17,6 @@ export default function DropdownComponent({ genres, setGenre }) {
       {genres.map(genre => {
         return <Dropdown.Item key = {genre} eventKey={genre}>{genre}</Dropdown.Item>
       })}
-
     </DropdownButton>
   )
 }

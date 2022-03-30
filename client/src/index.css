@@ -134,26 +134,38 @@ body {
   /* RECOMMENDATIONS */
   .recommendationsContainer{
     display: flex;
+    justify-content: space-evenly;
   }
 
+  .recommendationsCardDetails{
+    align-self: center;
+    justify-self: center;
+    color: black;
+  }
+
+  .recommendationsCardDetails a{
+    color: rgb(91, 211, 101);
+    text-decoration: none;
+  }
 
   .recommendationsList{
     position: relative;
     margin-top: 5%;
-    margin-left: 5%;
     width: 40%;
+  }
+
+  .break {
+    flex-basis: 100%;
+    height: 0;
   }
 
   /* display song info, column two in flexbox */
   .recommendationsCard{
     margin-top: 5%;
-    margin-left: 5%;
     min-width: 40%;
-    background-color: white;
-  }
 
-  .recommendationsCard:hover {
-    cursor: pointer;
+    display: flex;
+    justify-content: space-evenly;
   }
 
   .songCard{
@@ -189,6 +201,11 @@ body {
     font-size: xx-small;
     position:absolute;
     right: 0;
+  }
+
+  .recommendationsLink {
+    color: black;
+    text-decoration: none;
   }
 
    /* ABOUT */
