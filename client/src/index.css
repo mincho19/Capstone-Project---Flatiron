@@ -94,9 +94,9 @@ body {
   }
 
   .term_main{
-    justify-content: center;
+    justify-content: space-evenly;
     text-align: center;
-    background-color: white;
+    display: flex;
   }
 
   .term_button{
