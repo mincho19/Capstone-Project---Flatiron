@@ -24,6 +24,7 @@ export default function Recommendation() {
 
   function displayDetails(obj){
     setDisplaySong(obj)
+
     if(currentAudio != ''){
       currentAudio.pause()
     }

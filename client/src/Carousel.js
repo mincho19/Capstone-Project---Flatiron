@@ -9,19 +9,15 @@ export default function CarouselComponent({recommendedsongsarray}) {
 
     return (
         <>
-        <h1>Featured Tracks</h1>
+        <h1 className = "featuredTrackHeading">Featured Tracks</h1>
         <Carousel>
         {recommendedsongsarray.map(songObject => 
             <Carousel.Item key = {songObject['song']['id']} onClick = {() => handleClick(songObject['song']['external_url'])}>
-           
-
            <img
             className = "image"
               src={songObject['album']['image_url']}
               alt={songObject['song']['name']}
             />
-
-
             <Carousel.Caption>
               <h3>{songObject['song']['name']}</h3>
               <p>{songObject['artist']['name']}</p>

@@ -134,14 +134,9 @@ const genres = [
   "world-music"
 ]
 
-//need to add descriptions about metric
-//clean up recommendations page
-
-//fix song album art bug
 //set navigation
 //clean up regetting tokens
 
-//clean up about
 
 //webplayback
 
@@ -151,7 +146,7 @@ export default function Main() {
   const [recommendedSongs, setRecommendedSongs] = useState([])
   const [graphSongData, setGraphSongData] = useState()
   const [termGraph, setTermGraph] = useState(true)
-  const [term, setTerm] = useState("Medium")
+  const [term, setTerm] = useState("Medium Term ~ 6 Months")
   const [carouselToggle, setCarouselToggle] = useState(false)
   const [genre, setGenre] = useState('pop')
 
@@ -259,7 +254,6 @@ export default function Main() {
         </div>
 
         <div className = "featureColumn">
-          
           {carouselToggle
             ? <Carousel className = "carousel" recommendedsongsarray = {recommendedSongs}/>
             : <></>
