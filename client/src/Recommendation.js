@@ -32,6 +32,12 @@ export default function Recommendation() {
     setCurrentAudio(audio)
     audio.play();
   }
+
+  function playPause(){
+    if(currentAudio != ''){
+      currentAudio.paused ? currentAudio.play() : currentAudio.pause()
+    }
+  }
   
   return (
 
@@ -52,18 +58,20 @@ export default function Recommendation() {
         </div>
 
 
-
-        <div className = "recommendationsCard">
-          <img src = {displaySong.albumImage} className = "recommendationsCardImage"></img>
-          <div className = "recommendationsCardDetails">
-            <a href={displaySong.songURL}>Name: {displaySong.songName}</a>
-            <div className = "break"></div>
-            <a href={displaySong.albumURL}>Album: {displaySong.albumName}</a>
-            <div className = "break"></div>
-            <a href={displaySong.artistURL}>Artist: {displaySong.artistName}</a>
-            <div className = "break"></div>
-          </div>
+        {displaySong 
+        ? <div className = "recommendationsCard">
+        <img src = {displaySong.albumImage} className = "recommendationsCardImage" onClick = {playPause}></img>
+        <div className = "recommendationsCardDetails">
+          <a href={displaySong.songURL}>Name: {displaySong.songName}</a>
+          <div className = "break"></div>
+          <a href={displaySong.albumURL}>Album: {displaySong.albumName}</a>
+          <div className = "break"></div>
+          <a href={displaySong.artistURL}>Artist: {displaySong.artistName}</a>
+          <div className = "break"></div>
         </div>
+      </div>
+      : <></>}
+        
       </div>
     </>
   )
