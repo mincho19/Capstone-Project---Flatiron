@@ -1,7 +1,7 @@
 Postgres start: sudo service postgresql start
 
-Front-end Server: Cd into client. "npm start"
-Back-end Server: rails s
+Front-end Server: change directory into client. "npm start"
+Back-end Server: "rails s"
 
 then open localhost:3000 (back-end) and localhost:4000 (front-end)
 
