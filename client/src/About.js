@@ -65,7 +65,7 @@ export default function About() {
             <strong>Valence</strong>
             <p>A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).</p>
         </div>
-
+{/* 
         <h1>Music Recommendation Method</h1>
         <div>Personalization services at Spotify rely on learning meaningful representations of tracks and users to surface apt recommendations to users in a number of different use cases. When learning track representations, one can leverage various types of heterogeneous information encoded in music data to benefit downstream recommendation tasks: </div>
         <br></br>
@@ -85,7 +85,7 @@ export default function About() {
           <li> Enables specifying different types of relations or nodes, to allow for embeddings which generalize across multiple downstream tasks;</li>
           <li> Is inherently inductive, thereby allowing to obtain representations for new tracks without the need for model retraining.</li>
         </ul>
-        We empirically validated our approach against the state of the art for representation learning on musical data. Our results show the benefit of aggregating both organizational and content information to learn track representations that are used for downstream tasks.
+        We empirically validated our approach against the state of the art for representation learning on musical data. Our results show the benefit of aggregating both organizational and content information to learn track representations that are used for downstream tasks. */}
 
       </Container>
     </div>
